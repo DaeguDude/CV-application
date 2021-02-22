@@ -1,5 +1,6 @@
 import logo from './logo.svg';
-import './App.css';
+
+const show = 1
 
 function App() {
   return (
