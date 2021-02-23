@@ -1,0 +1,120 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+h2 {
+  font-size: 1.125rem;
+}
+
+label {
+  font-size: 0.9375rem;
+  padding: 0 0 .5rem;
+}
+
+input {
+  font-size: 1rem;
+  border: 2px solid #eaeaea;
+  border-radius: 3px;
+  padding: .75rem .875rem;
+}
+
+input:focus {
+  outline-color: #7eb7f6;
+  border: 2px solid #7eb7f6;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  color: #4c4c4c;
+}
+
+.general-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.form__item {
+  padding: 0 0 1.3rem;
+}
+
+.container {
+  width: 90%;
+  max-width: 850px;
+  padding: 0 2.5rem;
+
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 15px 35px rgb(50 50 93 / 10%), 0 5px 15px rgb(0 0 0 / 7%);
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-end {
+  justify-content: flex-end;
+}
+
+.flex-1-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-2-col {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-2-col__left {
+  padding-right: 10px;
+}
+
+.flex-2-col__right {
+  padding-left: 10px;
+}
+
+.flex-full {
+  flex: 1 0 0;
+}
+
+.general-info__title {
+  font-weight: 700;
+  margin: 0;
+  padding: 1.875rem 0 1.5625rem;
+}
+
+hr {
+  margin-bottom: 1.25rem;
+}
+
+.general-info footer {
+  padding-bottom: 2rem;
+}
+
+.form__btn {
+  cursor: pointer;
+  border: 2px solid #e6e5e5;
+  border-radius: 4px;
+  outline: none;
+  margin: 0 0 0 10px;
+  padding: 6px 11px 7px 35px;
+  text-align: center;
+}
+
+.form__btn:hover {
+  background:rgb(50 50 93 / 10%);
+  color: #3e94d9;
+}
+
+.form__btn:active {
+  transform: scale(0.95);
+}
+
+
