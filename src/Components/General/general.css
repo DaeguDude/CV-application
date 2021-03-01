@@ -129,6 +129,20 @@ hr {
   padding: 1.875rem 0 1.5625rem;
 }
 
-.general-info footer {
-  padding-bottom: 2rem;
+footer {
+  display: flex;
+  justify-content: center;
+}
+
+.next-step-btn {
+  color: #fff;
+  background: #626ccc;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgb(50 50 93 / 11%), 0 1px 3px rgb(0 0 0 / 8%);
+  outline: none;
+  font-size: 18px;
+  padding: 1rem 1.5rem;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
 }
