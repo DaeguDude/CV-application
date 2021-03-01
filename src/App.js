@@ -1,12 +1,8 @@
-import logo from './logo.svg';
-
-const show = 1
+import General from './Components/General';
+import './Components/General/general.css';
 
 function App() {
-  return (
-    <div>
-    </div>
-  );
+  return <General />;
 }
 
 export default App;
