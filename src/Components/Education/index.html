@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="edu.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <section class="form">
+      <div class="container">
+        <div class="general-info">
+          <header>
+            <h2 class="general-info__title">Education and Qualifications</h2>
+          </header>
+
+          <hr />
+
+          <div class="form__item flex-row">
+            <div class="flex-col full-width">
+              <label class="form__label" for="">Degree</label>
+              <input class="form__input" type="text" />
+            </div>
+            <div class="flex-col full-width flex__margin_l20">
+              <label class="form__label" for="">City/Town</label>
+              <input class="form__input" type="text" />
+            </div>
+          </div>
+
+          <div class="form__item flex-col">
+            <label class="form__label" for="">School</label>
+            <input class="form__input" type="text" />
+          </div>
+
+          <div class="form__item flex-row">
+            <div class="flex-col full-width">
+              <label class="form__label" for="">Start Date</label>
+              <div class="flex-row">
+                <select class="form__select full-width">
+                  <option>Don't show</option>
+                  <option value="hidden">Show year only</option>
+                  <option value="1">January</option>
+                  <option value="2">February</option>
+                  <option value="3">March</option>
+                  <option value="4">April</option>
+                  <option value="5">May</option>
+                  <option value="6">June</option>
+                  <option value="7">July</option>
+                  <option value="8">August</option>
+                  <option value="9">September</option>
+                  <option value="10">October</option>
+                  <option value="11">November</option>
+                  <option value="12">December</option>
+                </select>
+                <select class="form__select full-width flex__margin_l20">
+                  <option>Don't show</option>
+                  <option value="hidden">Show year only</option>
+                  <option value="1">January</option>
+                </select>
+              </div>
+            </div>
+            <div class="flex-col full-width flex__margin_l20">
+              <label class="form__label" for="">End Date</label>
+              <div class="flex-row">
+                <select class="form__select full-width">
+                  <option>Don't show</option>
+                  <option value="hidden">Show year only</option>
+                  <option value="1">January</option>
+                </select>
+                <select class="form__select full-width flex__margin_l20">
+                  <option>Don't show</option>
+                  <option value="hidden">Show year only</option>
+                  <option value="1">January</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form__item flex-col">
+            <label class="form__label" for="">Description</label>
+            <input class="form__input" type="text" />
+          </div>
+
+          <footer class="flex flex-end">
+            <button class="form__btn">Save</button>
+          </footer>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
