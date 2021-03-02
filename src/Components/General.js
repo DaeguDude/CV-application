@@ -1,51 +1,73 @@
 import React from 'react';
-import FormItem from './Form';
+import { FormItem, FormItemTwoColumns } from './Form';
 
 class General extends React.Component {
   render() {
     return (
-      <section class="form">
-        <div class="container">
-          <div class="general-info">
-            <header>
-              <h2 class="general-info__title">Personal Details</h2>
-            </header>
-
-            <hr />
-            <FormItem label="First name" />
-            <FormItem label="Last name" type="text" />
-
-            <div class="form__item flex-row">
-              <div class="flex-col full-width">
-                <label class="form__label">Email address</label>
-                <input class="form__input" type="text" />
-              </div>
-              <div class="flex-col full-width flex__margin_l20">
-                <label class="form__label">Phone number</label>
-                <input class="form__input" type="text" />
-              </div>
-            </div>
-            <FormItem label="Address" />
-
-            <div class="form__item flex-row">
-              <div class="flex-col full-width">
-                <label class="form__label">Zip code</label>
-                <input class="form__input" type="text" />
-              </div>
-              <div class="flex-col full-width flex__margin_l20">
-                <label class="form__label">City/Town</label>
-                <input class="form__input" type="text" />
-              </div>
-            </div>
-          </div>
-
-          <footer>
-            <button class="next-step-btn">Next step</button>
-          </footer>
-        </div>
-      </section>
+      <div className="container">
+        <form className="form general-info">
+          <FormSection />
+          <FormFooter text="Next Step" />
+        </form>
+      </div>
     );
   }
+}
+
+function FormSection(props) {
+  return (
+    <div className="form__section">
+      <FormSectionHeader title="Personal details" />
+      <hr />
+      <FormItem label="First name" />
+      <FormItem label="Last name" type="text" />
+      <FormItemTwoColumns
+        firstColLabel="Email address"
+        secondColLabel="Phone number"
+      />
+      <FormItem label="Address" />
+      <FormItemTwoColumns firstColLabel="Zip code" secondColLabel="City/Town" />
+      <FormSectionFooter />
+    </div>
+  );
+}
+
+function FormSectionHeader(props) {
+  return (
+    <header>
+      <h2 className="general-info__title">{props.title}</h2>
+    </header>
+  );
+}
+
+function FormSectionFooter(props) {
+  return (
+    <footer>
+      <FormSectionLongBtn text="Additional Infomration" />
+    </footer>
+  );
+}
+
+function FormSectionLongBtn(props) {
+  return (
+    <button className="form__long-btn">
+      <i class="far fa-plus-square"></i>
+      <span>{props.text}</span>
+    </button>
+  );
+}
+
+function FormFooter(props) {
+  return (
+    <footer className="form__footer">
+      <div class="container">
+        <button className="next-btn">
+          <span>{props.text}</span>
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </footer>
+  );
 }
 
 export default General;

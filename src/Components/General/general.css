@@ -9,6 +9,20 @@ body {
 }
 
 /**************** 
+  Tag Setting
+****************/
+
+button {
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+
+button:active {
+  transform: scale(0.99);
+}
+
+/**************** 
   Typography
 ****************/
 
@@ -25,24 +39,50 @@ hr {
 }
 
 .container {
+  display: flex;
+  justify-content: center;
+}
+
+.form {
   width: 90%;
   max-width: 850px;
-  padding: 0 2.5rem;
+}
 
+.form__section {
+  padding: 0 2.5rem 2rem 2.5rem;
+  margin-bottom: 3rem;
   border-radius: 4px;
   background: #fff;
   box-shadow: 0 15px 35px rgb(50 50 93 / 10%), 0 5px 15px rgb(0 0 0 / 7%);
 }
 
+.form__footer {
+  color: #fff;
+}
+
+.form__footer:hover {
+  text-decoration: underline;
+}
+
+.form__footer button {
+  color: #fff;
+  background: #626ccc;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgb(50 50 93 / 11%), 0 1px 3px rgb(0 0 0 / 8%);
+
+  font-size: 18px;
+  padding: 1.2rem 1.8rem 1.2rem;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.form__footer span {
+  margin: 0 3rem;
+}
+
 /**************** 
   form
 ****************/
-
-.form {
-  display: flex;
-  justify-content: center;
-  color: #4c4c4c;
-}
 
 .form__item {
   padding: 0 0 1.3rem;
@@ -66,23 +106,23 @@ hr {
   border: 2px solid #7eb7f6;
 }
 
-.form__btn {
-  cursor: pointer;
-  border: 2px solid #e6e5e5;
-  border-radius: 4px;
+.form__long-btn {
+  width: 100%;
   outline: none;
-  margin: 0 0 0 10px;
-  padding: 6px 11px 7px 35px;
-  text-align: center;
+  border: none;
+  padding: 1rem;
+  color: #4c4c4c;
+  font-size: 1rem;
+  border-radius: 6px;
 }
 
-.form__btn:hover {
-  background: rgb(50 50 93 / 10%);
-  color: #3e94d9;
+.form__long-btn:hover {
+  background: #eaeaea;
+  text-decoration: underline;
 }
 
-.form__btn:active {
-  transform: scale(0.95);
+.form__long-btn span {
+  margin-left: 0.5rem;
 }
 
 /**************** 
@@ -118,20 +158,10 @@ hr {
   general-info
 ****************/
 
-.general-info {
-  display: flex;
-  flex-direction: column;
-}
-
 .general-info__title {
   font-weight: 700;
   margin: 0;
   padding: 1.875rem 0 1.5625rem;
-}
-
-footer {
-  display: flex;
-  justify-content: center;
 }
 
 .next-step-btn {
