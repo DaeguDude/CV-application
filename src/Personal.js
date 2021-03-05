@@ -39,12 +39,12 @@ class Personal extends React.Component {
           labelName="Last name"
           handleChange={this.handleChange}
         />
-        <FormItem
+        <FormItemEmail
           name="email"
           labelName="Email address"
           handleChange={this.handleChange}
         />
-        <FormItem
+        <FormItemTel
           name="phoneNumber"
           labelName="Phone number"
           handleChange={this.handleChange}
@@ -54,7 +54,7 @@ class Personal extends React.Component {
           labelName="Address"
           handleChange={this.handleChange}
         />
-        <FormItem
+        <FormItemZip
           name="zip"
           labelName="Zip code"
           handleChange={this.handleChange}
@@ -79,6 +79,50 @@ class FormItem extends React.Component {
       <div>
         <label>{labelName}</label>
         <input name={name} onChange={handleChange} type="text" />
+      </div>
+    );
+  }
+}
+
+class FormItemEmail extends React.Component {
+  render() {
+    const { name, labelName, handleChange } = this.props;
+
+    return (
+      <div>
+        <label>{labelName}</label>
+        <input name={name} onChange={handleChange} type="email" />
+      </div>
+    );
+  }
+}
+
+class FormItemTel extends React.Component {
+  render() {
+    const { name, labelName, handleChange } = this.props;
+
+    return (
+      <div>
+        <label>{labelName}</label>
+        <input name={name} onChange={handleChange} type="tel" />
+      </div>
+    );
+  }
+}
+
+class FormItemZip extends React.Component {
+  render() {
+    const { name, labelName, handleChange } = this.props;
+
+    return (
+      <div>
+        <label>{labelName}</label>
+        <input
+          name={name}
+          onChange={handleChange}
+          type="text"
+          pattern="[0-9]*"
+        />
       </div>
     );
   }
