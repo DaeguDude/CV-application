@@ -61,6 +61,7 @@ class Work extends React.Component {
           name="startYear"
           labelName="Start Year"
           handleChange={this.handleChange}
+          selectedYear={this.state.startYear}
         />
         <FormItemMonth
           name="endMonth"
@@ -71,6 +72,7 @@ class Work extends React.Component {
           name="endYear"
           labelName="End Year"
           handleChange={this.handleChange}
+          selectedYear={this.state.endYear}
         />
         <FormItem
           name="description"
@@ -112,7 +114,7 @@ class FormItemMonth extends React.Component {
 
 class FormItemYear extends React.Component {
   render() {
-    const { name, labelName, handleChange } = this.props;
+    const { name, labelName, handleChange, selectedYear } = this.props;
     const startYear = 1960;
     const currentYear = 2021;
     const emptyArray = Array(currentYear - startYear).fill(null);
@@ -125,7 +127,7 @@ class FormItemYear extends React.Component {
     return (
       <div>
         <label>{labelName}</label>
-        <select name={name} onChange={handleChange}>
+        <select name={name} onChange={handleChange} value={selectedYear}>
           {years.map((year) => (
             <option key={uniqid()}>{year}</option>
           ))}
