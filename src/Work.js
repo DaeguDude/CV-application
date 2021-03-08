@@ -10,22 +10,19 @@ class Work extends React.Component {
       startYear: 1961,
       endMonth: "Dont' Show This",
       endYear: 1961,
+      isDisplay: false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state.jobTitle);
-    console.log(this.state.city);
-    console.log(this.state.employer);
-    console.log(this.state.startMonth);
-    console.log(this.state.startYear);
-    console.log(this.state.endMonth);
-    console.log(this.state.endYear);
-    console.log(this.state.description);
+    this.setState({
+      isDisplay: true,
+    });
   }
 
   handleChange(e) {
@@ -34,65 +31,114 @@ class Work extends React.Component {
     });
   }
 
+  handleEdit(e) {
+    this.setState({
+      isDisplay: false,
+    });
+  }
+
   render() {
+    if (this.state.isDisplay) {
+      return <FormDisplay info={this.state} handleEdit={this.handleEdit} />;
+    } else {
+      return (
+        <div>
+          <h1>Work</h1>
+          <form>
+            <FormItem
+              name="jobTitle"
+              labelName="Job Title"
+              value={this.state.jobTitle}
+              handleChange={this.handleChange}
+            />
+            <FormItem
+              name="city"
+              labelName="City/Town"
+              value={this.state.city}
+              handleChange={this.handleChange}
+            />
+            <FormItem
+              name="employer"
+              labelName="Employer"
+              value={this.state.employer}
+              handleChange={this.handleChange}
+            />
+            <FormItemMonth
+              name="startMonth"
+              labelName="Start Month"
+              value={this.state.startMonth}
+              handleChange={this.handleChange}
+            />
+            <FormItemYear
+              name="startYear"
+              labelName="Start Year"
+              value={this.state.startYear}
+              handleChange={this.handleChange}
+            />
+            <FormItemMonth
+              name="endMonth"
+              labelName="End Month"
+              value={this.state.endMonth}
+              handleChange={this.handleChange}
+            />
+            <FormItemYear
+              name="endYear"
+              labelName="End Year"
+              value={this.state.endYear}
+              handleChange={this.handleChange}
+            />
+            <FormItem
+              name="description"
+              labelName="Description"
+              value={this.state.description}
+              handleChange={this.handleChange}
+            />
+            <SubmitBtn btnName="save" handleSubmit={this.handleSubmit} />
+          </form>
+        </div>
+      );
+    }
+  }
+}
+
+class FormDisplay extends React.Component {
+  render() {
+    const {
+      jobTitle,
+      city,
+      employer,
+      startMonth,
+      startYear,
+      endMonth,
+      endYear,
+      description,
+    } = this.props.info;
+
     return (
-      <form>
-        <FormItem
-          name="jobTitle"
-          labelName="Job Title"
-          handleChange={this.handleChange}
-        />
-        <FormItem
-          name="city"
-          labelName="City/Town"
-          handleChange={this.handleChange}
-        />
-        <FormItem
-          name="employer"
-          labelName="Employer"
-          handleChange={this.handleChange}
-        />
-        <FormItemMonth
-          name="startMonth"
-          labelName="Start Month"
-          handleChange={this.handleChange}
-        />
-        <FormItemYear
-          name="startYear"
-          labelName="Start Year"
-          handleChange={this.handleChange}
-          selectedYear={this.state.startYear}
-        />
-        <FormItemMonth
-          name="endMonth"
-          labelName="End Month"
-          handleChange={this.handleChange}
-        />
-        <FormItemYear
-          name="endYear"
-          labelName="End Year"
-          handleChange={this.handleChange}
-          selectedYear={this.state.endYear}
-        />
-        <FormItem
-          name="description"
-          labelName="Description"
-          handleChange={this.handleChange}
-        />
-        <SubmitBtn btnName="save" handleSubmit={this.handleSubmit} />
-      </form>
+      <div>
+        <h1>Work</h1>
+        <p>Job Title: {jobTitle}</p>
+        <p>City: {city}</p>
+        <p>Employer: {employer}</p>
+        <p>Start Month: {startMonth}</p>
+        <p>Start Year: {startYear}</p>
+        <p>End Month: {endMonth}</p>
+        <p>End Year: {endYear}</p>
+        <p>Description: {description}</p>
+        <EditBtn handleEdit={this.props.handleEdit} />
+      </div>
     );
   }
 }
 
 class FormItemMonth extends React.Component {
   render() {
-    const { name, labelName, handleChange } = this.props;
+    const { name, labelName, handleChange, value } = this.props;
 
     return (
       <div>
         <label>{labelName}</label>
-        <select name={name} onChange={handleChange}>
+        <select name={name} value={value} onChange={handleChange}>
           <option>Don't Show This</option>
           <option>Show Year Only</option>
           <option>January</option>
@@ -114,7 +160,7 @@ class FormItemMonth extends React.Component {
 
 class FormItemYear extends React.Component {
   render() {
-    const { name, labelName, handleChange, selectedYear } = this.props;
+    const { name, labelName, handleChange, value } = this.props;
     const startYear = 1960;
     const currentYear = 2021;
     const emptyArray = Array(currentYear - startYear).fill(null);
@@ -122,18 +168,22 @@ class FormItemYear extends React.Component {
       return index + 1 + startYear;
     });
 
-    // const listItems = numbers.map((number) => <li>{number}</li>);
-
     return (
       <div>
         <label>{labelName}</label>
-        <select name={name} onChange={handleChange} value={selectedYear}>
+        <select name={name} value={value} onChange={handleChange}>
           {years.map((year) => (
             <option key={uniqid()}>{year}</option>
           ))}
         </select>
       </div>
     );
+  }
+}
+
+class EditBtn extends React.Component {
+  render() {
+    return <button onClick={this.props.handleEdit}>Edit</button>;
   }
 }
 

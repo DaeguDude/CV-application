@@ -10,10 +10,13 @@ import {
 class Personal extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      isDisplay: false,
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   handleChange(e) {
@@ -24,57 +27,128 @@ class Personal extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state.firstName);
-    console.log(this.state.lastName);
-    console.log(this.state.email);
-    console.log(this.state.phoneNumber);
-    console.log(this.state.address);
-    console.log(this.state.zip);
-    console.log(this.state.city);
+    this.setState({
+      isDisplay: true,
+    });
+  }
+
+  handleEdit(e) {
+    this.setState({
+      isDisplay: false,
+    });
   }
 
   render() {
+    if (this.state.isDisplay) {
+      return <FormDisplay info={this.state} handleEdit={this.handleEdit} />;
+    } else {
+      return (
+        <div>
+          <h1>Personal</h1>
+          <FormInputField
+            info={this.state}
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+          />
+        </div>
+      );
+    }
+  }
+}
+
+class FormDisplay extends React.Component {
+  render() {
+    const {
+      address,
+      city,
+      email,
+      firstName,
+      lastName,
+      phoneNumber,
+      zip,
+    } = this.props.info;
+
+    return (
+      <div>
+        <h1>Personal</h1>
+        <p>First Name: {firstName}</p>
+        <p>Last Name: {lastName}</p>
+        <p>Email Address: {email}</p>
+        <p>Phone Number: {phoneNumber}</p>
+        <p>Address: {address}</p>
+        <p>Zip Code: {zip}</p>
+        <p>City: {city}</p>
+        <EditBtn handleEdit={this.props.handleEdit} />
+      </div>
+    );
+  }
+}
+
+class FormInputField extends React.Component {
+  render() {
+    const {
+      address,
+      city,
+      email,
+      firstName,
+      lastName,
+      phoneNumber,
+      zip,
+    } = this.props.info;
     return (
       <form>
         <FormItem
           name="firstName"
           labelName="First name"
-          handleChange={this.handleChange}
+          value={firstName}
+          handleChange={this.props.handleChange}
         />
         <FormItem
           name="lastName"
           labelName="Last name"
-          handleChange={this.handleChange}
+          value={lastName}
+          handleChange={this.props.handleChange}
         />
         <FormItemEmail
           name="email"
           labelName="Email address"
-          handleChange={this.handleChange}
+          value={email}
+          handleChange={this.props.handleChange}
         />
         <FormItemTel
           name="phoneNumber"
           labelName="Phone number"
-          handleChange={this.handleChange}
+          value={phoneNumber}
+          handleChange={this.props.handleChange}
         />
         <FormItem
           name="address"
           labelName="Address"
-          handleChange={this.handleChange}
+          value={address}
+          handleChange={this.props.handleChange}
         />
         <FormItemZip
           name="zip"
           labelName="Zip code"
-          handleChange={this.handleChange}
+          value={zip}
+          handleChange={this.props.handleChange}
         />
         <FormItem
           name="city"
           labelName="City/Town"
-          handleChange={this.handleChange}
+          value={city}
+          handleChange={this.props.handleChange}
         />
 
-        <SubmitBtn btnName="Display" handleSubmit={this.handleSubmit} />
+        <SubmitBtn btnName="Display" handleSubmit={this.props.handleSubmit} />
       </form>
     );
+  }
+}
+
+class EditBtn extends React.Component {
+  render() {
+    return <button onClick={this.props.handleEdit}>Edit</button>;
   }
 }
 
