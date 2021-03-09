@@ -7,7 +7,7 @@ import {
   EditBtn,
 } from './Form';
 
-class Educational extends React.Component {
+class Education extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -136,4 +136,4 @@ class FormDisplay extends React.Component {
   }
 }
 
-export default Educational;
+export default Education;
