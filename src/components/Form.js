@@ -91,12 +91,10 @@ class FormItemYear extends React.Component {
     const { name, labelName, handleChange, value } = this.props;
     const startYear = 1960;
     const currentYear = 2021;
-    const emptyArray = Array(currentYear - startYear).fill(null);
-    const years = emptyArray.map((year, index) => {
-      return index + 1 + startYear;
+    const emptyArray = Array(currentYear - startYear + 1).fill(null);
+    const years = emptyArray.map((year, yearToAdd) => {
+      return startYear + yearToAdd;
     });
-
-    // const listItems = numbers.map((number) => <li>{number}</li>);
 
     return (
       <div>

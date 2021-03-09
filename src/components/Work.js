@@ -12,9 +12,9 @@ class Work extends React.Component {
     super(props);
     this.state = {
       startMonth: "Don't Show This",
-      startYear: 1961,
+      startYear: 1960,
       endMonth: "Dont' Show This",
-      endYear: 1961,
+      endYear: 1960,
       isDisplay: false,
     };
 
