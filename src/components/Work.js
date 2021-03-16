@@ -11,34 +11,48 @@ class Work extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      startMonth: "Don't Show This",
-      startYear: 1960,
-      endMonth: "Dont' Show This",
-      endYear: 1960,
+      history: [{}],
+      current: {},
+      workNumber: 0,
       isDisplay: false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
+    this.handleAddWork = this.handleAddWork.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    this.setState({
-      isDisplay: true,
+    this.setState((state) => {
+      return { history: state.history };
     });
+
+    // this.setState({
+    //   isDisplay: true,
+    // });
   }
 
   handleChange(e) {
     this.setState({
-      [e.target.name]: e.target.value,
+      current: Object.assign({}, this.state.current, {
+        [e.target.name]: e.target.value,
+      }),
     });
   }
 
   handleEdit(e) {
     this.setState({
       isDisplay: false,
+    });
+  }
+
+  handleAddWork(e) {
+    // console.log('Add work my bro');
+    e.preventDefault();
+    this.setState({
+      isDisplay: true,
     });
   }
 
@@ -49,60 +63,87 @@ class Work extends React.Component {
       return (
         <div>
           <h1>Work</h1>
-          <form>
-            <FormItem
-              name="jobTitle"
-              labelName="Job Title"
-              value={this.state.jobTitle}
-              handleChange={this.handleChange}
-            />
-            <FormItem
-              name="city"
-              labelName="City/Town"
-              value={this.state.city}
-              handleChange={this.handleChange}
-            />
-            <FormItem
-              name="employer"
-              labelName="Employer"
-              value={this.state.employer}
-              handleChange={this.handleChange}
-            />
-            <FormItemMonth
-              name="startMonth"
-              labelName="Start Month"
-              value={this.state.startMonth}
-              handleChange={this.handleChange}
-            />
-            <FormItemYear
-              name="startYear"
-              labelName="Start Year"
-              value={this.state.startYear}
-              handleChange={this.handleChange}
-            />
-            <FormItemMonth
-              name="endMonth"
-              labelName="End Month"
-              value={this.state.endMonth}
-              handleChange={this.handleChange}
-            />
-            <FormItemYear
-              name="endYear"
-              labelName="End Year"
-              value={this.state.endYear}
-              handleChange={this.handleChange}
-            />
-            <FormItem
-              name="description"
-              labelName="Description"
-              value={this.state.description}
-              handleChange={this.handleChange}
-            />
-            <SubmitBtn btnName="save" handleSubmit={this.handleSubmit} />
-          </form>
+          <WorkForm
+            info={this.state}
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+          />
+          <button className="add-section-btn" onClick={this.handleAddWork}>
+            Add another work experience
+          </button>
         </div>
       );
     }
+  }
+}
+
+class WorkForm extends React.Component {
+  render() {
+    const {
+      current,
+      jobTitle,
+      city,
+      employer,
+      startMonth,
+      startYear,
+      endMonth,
+      endYear,
+      description,
+    } = this.props.info;
+
+    return (
+      <form>
+        <FormItem
+          name="jobTitle"
+          labelName="Job Title"
+          value={jobTitle}
+          handleChange={this.props.handleChange}
+        />
+        <FormItem
+          name="city"
+          labelName="City/Town"
+          value={city}
+          handleChange={this.props.handleChange}
+        />
+        <FormItem
+          name="employer"
+          labelName="Employer"
+          value={employer}
+          handleChange={this.props.handleChange}
+        />
+        <FormItemMonth
+          name="startMonth"
+          labelName="Start Month"
+          value={startMonth}
+          handleChange={this.props.handleChange}
+        />
+        <FormItemYear
+          name="startYear"
+          labelName="Start Year"
+          value={startYear}
+          handleChange={this.props.handleChange}
+        />
+        <FormItemMonth
+          name="endMonth"
+          labelName="End Month"
+          value={endMonth}
+          handleChange={this.props.handleChange}
+        />
+        <FormItemYear
+          name="endYear"
+          labelName="End Year"
+          value={endYear}
+          handleChange={this.props.handleChange}
+        />
+        <FormItem
+          name="description"
+          labelName="Description"
+          value={description}
+          handleChange={this.props.handleChange}
+        />
+        <SubmitBtn btnName="save" handleSubmit={this.props.handleSubmit} />
+      </form>
+    );
   }
 }
 
