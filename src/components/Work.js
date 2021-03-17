@@ -11,8 +11,17 @@ class Work extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      history: [{}],
-      current: {},
+      history: [],
+      current: {
+        jobTitle: '',
+        city: '',
+        employer: '',
+        description: '',
+        startMonth: "Don't Show This",
+        startYear: 1960,
+        endMonth: "Don't Show This",
+        endYear: 1960,
+      },
       workNumber: 0,
       isDisplay: false,
     };
@@ -25,19 +34,29 @@ class Work extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.setState((state) => {
-      return { history: state.history };
+    this.setState({
+      history: this.state.history.concat(this.state.current),
+      current: {
+        jobTitle: '',
+        city: '',
+        employer: '',
+        description: '',
+        startMonth: "Don't Show This",
+        startYear: 1960,
+        endMonth: "Don't Show This",
+        endYear: 1960,
+      },
     });
-
-    // this.setState({
-    //   isDisplay: true,
-    // });
   }
 
   handleChange(e) {
+    const target = e.target;
+    const value = target.value;
+    const name = target.name;
+
     this.setState({
       current: Object.assign({}, this.state.current, {
-        [e.target.name]: e.target.value,
+        [name]: value,
       }),
     });
   }
@@ -49,7 +68,6 @@ class Work extends React.Component {
   }
 
   handleAddWork(e) {
-    // console.log('Add work my bro');
     e.preventDefault();
     this.setState({
       isDisplay: true,
@@ -64,7 +82,7 @@ class Work extends React.Component {
         <div>
           <h1>Work</h1>
           <WorkForm
-            info={this.state}
+            info={this.state.current}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
           />
@@ -79,8 +97,10 @@ class Work extends React.Component {
 
 class WorkForm extends React.Component {
   render() {
+    console.log(this.props);
+    console.log(this.props.info.jobTitle);
+
     const {
-      current,
       jobTitle,
       city,
       employer,
