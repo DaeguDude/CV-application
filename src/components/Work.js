@@ -6,6 +6,7 @@ import {
   FormItemYear,
   EditBtn,
 } from './Form';
+import uniqid from 'uniqid';
 
 class Work extends React.Component {
   constructor(props) {
@@ -23,12 +24,10 @@ class Work extends React.Component {
         endYear: 1960,
       },
       workNumber: 0,
-      isDisplay: false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleEdit = this.handleEdit.bind(this);
     this.handleAddWork = this.handleAddWork.bind(this);
   }
 
@@ -61,45 +60,32 @@ class Work extends React.Component {
     });
   }
 
-  handleEdit(e) {
-    this.setState({
-      isDisplay: false,
-    });
-  }
-
   handleAddWork(e) {
     e.preventDefault();
-    this.setState({
-      isDisplay: true,
-    });
   }
 
   render() {
-    if (this.state.isDisplay) {
-      return <FormDisplay info={this.state} handleEdit={this.handleEdit} />;
-    } else {
-      return (
-        <div>
-          <h1>Work</h1>
-          <WorkForm
-            info={this.state.current}
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
-          />
-          <button className="add-section-btn" onClick={this.handleAddWork}>
-            Add another work experience
-          </button>
-        </div>
-      );
-    }
+    const { history, current } = this.state;
+
+    return (
+      <div>
+        <h1>Work</h1>
+        {history.length >= 1 && <WorkList history={history} />}
+        <WorkForm
+          info={current}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+        />
+
+        {/* Extract it to component */}
+        <AddMoreBtn />
+      </div>
+    );
   }
 }
 
 class WorkForm extends React.Component {
   render() {
-    console.log(this.props);
-    console.log(this.props.info.jobTitle);
-
     const {
       jobTitle,
       city,
@@ -167,32 +153,39 @@ class WorkForm extends React.Component {
   }
 }
 
-class FormDisplay extends React.Component {
+class WorkList extends React.Component {
+  // It should show the list of work experiences
+  // It will get history as props
   render() {
-    const {
-      jobTitle,
-      city,
-      employer,
-      startMonth,
-      startYear,
-      endMonth,
-      endYear,
-      description,
-    } = this.props.info;
+    // There will be a list of histories.
+    // How can I render a list of histories?
+    const history = this.props.history;
 
+    const listItem = history.map((work) => (
+      <li key={uniqid()}>
+        <div>
+          <h4>{work.jobTitle}</h4>
+          <p>
+            <span>{work.startYear}</span> -<span>{work.endYear}</span>
+          </p>
+        </div>
+        <div>
+          <button>Delete</button>
+          <button>Edit</button>
+        </div>
+      </li>
+    ));
+
+    return <ul>{listItem}</ul>;
+  }
+}
+
+class AddMoreBtn extends React.Component {
+  render() {
     return (
-      <div>
-        <h1>Work</h1>
-        <p>Job Title: {jobTitle}</p>
-        <p>City: {city}</p>
-        <p>Employer: {employer}</p>
-        <p>Start Month: {startMonth}</p>
-        <p>Start Year: {startYear}</p>
-        <p>End Month: {endMonth}</p>
-        <p>End Year: {endYear}</p>
-        <p>Description: {description}</p>
-        <EditBtn handleEdit={this.props.handleEdit} />
-      </div>
+      <button className="add-section-btn" onClick={this.props.handleAddWork}>
+        Add another work experience
+      </button>
     );
   }
 }
