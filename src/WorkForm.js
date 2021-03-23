@@ -9,11 +9,13 @@ import {
   FormBtn,
 } from './PersonalForm';
 
+import { FormCard } from './Form';
+
 class WorkForm extends React.Component {
   render() {
     return (
-      <form class="form">
-        <div class="form__content">
+      <form className="form">
+        <div className="form__content">
           <FormTitle title="Work Experiences" />
           <FormCard />
           <FormCard />
@@ -28,7 +30,7 @@ class WorkForm extends React.Component {
 class FormInfoField extends React.Component {
   render() {
     return (
-      <div class="form__info-field">
+      <div className="form__info-field">
         <TwoColumnsFormRow
           firstItem={<FormItem name="Job Title" type="text" />}
           secondItem={<FormItem name="City/Town" type="text" />}
@@ -59,9 +61,9 @@ class FirstItem extends React.Component {
     const name = this.props.name;
 
     return (
-      <div class="col">
-        <label class="form__label">{name}</label>
-        <div class="row">
+      <div className="col">
+        <label className="form__label">{name}</label>
+        <div className="row">
           <FormItemMonth />
           <FormItemYear />
         </div>
@@ -75,9 +77,9 @@ class SecondItem extends React.Component {
     const name = this.props.name;
 
     return (
-      <div class="col">
-        <label class="form__label">{name}</label>
-        <div class="row">
+      <div className="col">
+        <label className="form__label">{name}</label>
+        <div className="row">
           <FormItemMonth />
           <FormItemYear />
         </div>
@@ -102,7 +104,7 @@ class FormItemTextArea extends React.Component {
 class FormItemMonth extends React.Component {
   render() {
     return (
-      <select class="form__input col">
+      <select className="form__input col">
         <option>Don't Show This</option>
         <option>Show Year Only</option>
         <option>January</option>
@@ -123,6 +125,8 @@ class FormItemMonth extends React.Component {
 
 class FormItemYear extends React.Component {
   render() {
+    console.log(this.props);
+
     const startYear = 1960;
     const currentYear = 2021;
     const emptyArray = Array(currentYear - startYear + 1).fill(null);
@@ -131,7 +135,7 @@ class FormItemYear extends React.Component {
     });
 
     return (
-      <select class="form__input col">
+      <select className="form__input col">
         {years.map((year) => (
           <option key={uniqid()}>{year}</option>
         ))}
@@ -154,7 +158,7 @@ class FormSmallBtns extends React.Component {
 class FormDeleteBtn extends React.Component {
   render() {
     return (
-      <button class="form__small-btn">
+      <button className="form__small-btn">
         <svg
           className="small-btn__icon"
           xmlns="http://www.w3.org/2000/svg"
@@ -174,7 +178,7 @@ class FormDeleteBtn extends React.Component {
 class FormSaveBtn extends React.Component {
   render() {
     return (
-      <button class="form__small-btn">
+      <button className="form__small-btn">
         <svg
           className="small-btn__icon"
           xmlns="http://www.w3.org/2000/svg"
@@ -196,7 +200,7 @@ class FormAddAnotherBtn extends React.Component {
     return (
       <button className="form__add-another-btn">
         <svg
-          class="add-another-btn__icon"
+          className="add-another-btn__icon"
           xmlns="http://www.w3.org/2000/svg"
           height="24"
           viewBox="0 0 24 24"
@@ -207,57 +211,6 @@ class FormAddAnotherBtn extends React.Component {
         </svg>
         <span>Add another work experience</span>
       </button>
-    );
-  }
-}
-
-class FormCard extends React.Component {
-  render() {
-    return (
-      <div className="form__card">
-        <div className="form__card-info">
-          <p className="form__card-job-title">Sales Manager</p>
-          <p className="form__card-date">october 2021 - july 2021</p>
-        </div>
-        <div className="form__card-icons">
-          <FormCardDelete />
-          <FormCardEdit />
-        </div>
-      </div>
-    );
-  }
-}
-
-class FormCardDelete extends React.Component {
-  render() {
-    return (
-      <svg
-        className="form__card-icon form__card-delete"
-        xmlns="http://www.w3.org/2000/svg"
-        height="24"
-        viewBox="0 0 24 24"
-        width="24"
-      >
-        <path d="M0 0h24v24H0z" fill="none" />
-        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
-      </svg>
-    );
-  }
-}
-
-class FormCardEdit extends React.Component {
-  render() {
-    return (
-      <svg
-        className="form__card-icon form__card-edit"
-        xmlns="http://www.w3.org/2000/svg"
-        height="24"
-        viewBox="0 0 24 24"
-        width="24"
-      >
-        <path d="M0 0h24v24H0z" fill="none" />
-        <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
-      </svg>
     );
   }
 }

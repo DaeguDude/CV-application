@@ -3,12 +3,12 @@ import React from 'react';
 class PersonalForm extends React.Component {
   render() {
     return (
-      <form class="form">
-        <div class="form__content">
+      <form className="form">
+        <div className="form__content">
           <FormTitle title="Personal Details" />
           <PersonalInfoField />
         </div>
-        <div class="form__footer">
+        <div className="form__footer">
           <FormBtn />
         </div>
       </form>
@@ -21,8 +21,8 @@ class FormTitle extends React.Component {
     const title = this.props.title;
 
     return (
-      <header class="form__header">
-        <h2 class="form__title">{title}</h2>
+      <header className="form__header">
+        <h2 className="form__title">{title}</h2>
       </header>
     );
   }
@@ -61,12 +61,11 @@ class PersonalInfoField extends React.Component {
 class FormRow extends React.Component {
   render() {
     const children = this.props.children;
-    console.log(children.length);
 
     return children.length >= 2 ? (
-      <div class="form__row row">{children}</div>
+      <div className="form__row row">{children}</div>
     ) : (
-      <div class="form__row">{children}</div>
+      <div className="form__row">{children}</div>
     );
   }
 }
@@ -92,8 +91,8 @@ class FormItem extends React.Component {
 
     return (
       <div className="col">
-        <label class="form__label">{name}</label>
-        <input class="form__input" name={name} type={type} />
+        <label className="form__label">{name}</label>
+        <input className="form__input" name={name} type={type} />
       </div>
     );
   }
@@ -109,7 +108,7 @@ class FormBtn extends React.Component {
           height="24"
           viewBox="0 0 24 24"
           width="24"
-          class="next-icon"
+          className="next-icon"
         >
           <path d="M0 0h24v24H0z" fill="none" />
           <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
