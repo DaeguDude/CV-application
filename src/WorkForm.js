@@ -15,6 +15,9 @@ class WorkForm extends React.Component {
       <form class="form">
         <div class="form__content">
           <FormTitle title="Work Experiences" />
+          <FormCard />
+          <FormCard />
+          <FormCard />
           <FormInfoField />
         </div>
       </form>
@@ -25,7 +28,7 @@ class WorkForm extends React.Component {
 class FormInfoField extends React.Component {
   render() {
     return (
-      <div>
+      <div class="form__info-field">
         <TwoColumnsFormRow
           firstItem={<FormItem name="Job Title" type="text" />}
           secondItem={<FormItem name="City/Town" type="text" />}
@@ -191,7 +194,7 @@ class FormSaveBtn extends React.Component {
 class FormAddAnotherBtn extends React.Component {
   render() {
     return (
-      <button class="form__add-another-btn">
+      <button className="form__add-another-btn">
         <svg
           class="add-another-btn__icon"
           xmlns="http://www.w3.org/2000/svg"
@@ -204,6 +207,57 @@ class FormAddAnotherBtn extends React.Component {
         </svg>
         <span>Add another work experience</span>
       </button>
+    );
+  }
+}
+
+class FormCard extends React.Component {
+  render() {
+    return (
+      <div className="form__card">
+        <div className="form__card-info">
+          <p className="form__card-job-title">Sales Manager</p>
+          <p className="form__card-date">october 2021 - july 2021</p>
+        </div>
+        <div className="form__card-icons">
+          <FormCardDelete />
+          <FormCardEdit />
+        </div>
+      </div>
+    );
+  }
+}
+
+class FormCardDelete extends React.Component {
+  render() {
+    return (
+      <svg
+        className="form__card-icon form__card-delete"
+        xmlns="http://www.w3.org/2000/svg"
+        height="24"
+        viewBox="0 0 24 24"
+        width="24"
+      >
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+      </svg>
+    );
+  }
+}
+
+class FormCardEdit extends React.Component {
+  render() {
+    return (
+      <svg
+        className="form__card-icon form__card-edit"
+        xmlns="http://www.w3.org/2000/svg"
+        height="24"
+        viewBox="0 0 24 24"
+        width="24"
+      >
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+      </svg>
     );
   }
 }

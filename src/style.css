@@ -52,14 +52,18 @@ Form
   background: #fff;
 }
 
-.form__header {
+/* .form__header {
   border-bottom: 1px solid #dedede;
-}
+} */
 
 .form__title {
   font-size: 1.125rem;
   font-weight: 700;
   padding: 1.6em 0;
+}
+
+.form__info-field {
+  border-top: 1px solid #dedede;
 }
 
 .form__row {
@@ -181,4 +185,39 @@ Form
   width: 20px;
   height: 20px;
   margin-right: 0.2rem;
+}
+
+/* FormCard */
+
+.form__card {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em 0;
+  border-top: 1px solid #e5e5e5;
+}
+
+.form__card-job-title {
+  font-weight: 700;
+}
+
+.form__card-icons {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.form__card-icon {
+  cursor: pointer;
+}
+
+.form__card-icon + .form__card-icon {
+  margin-left: 2rem;
+}
+
+.form__card-delete:hover {
+  fill: #f24242;
+}
+
+.form__card-edit:hover {
+  fill: #2fb9ff;
 }
