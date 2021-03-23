@@ -1,5 +1,6 @@
 import React from 'react';
-import NextIcon from './icons/NextIcon';
+import { FormNextStepBtn } from './Form/FormBtns';
+import { FormTitle, FormRow, TwoColumnsFormRow, FormItem } from './Form/Form';
 
 class PersonalForm extends React.Component {
   render() {
@@ -10,21 +11,9 @@ class PersonalForm extends React.Component {
           <PersonalInfoField />
         </div>
         <div className="form__footer">
-          <FormBtn />
+          <FormNextStepBtn />
         </div>
       </form>
-    );
-  }
-}
-
-class FormTitle extends React.Component {
-  render() {
-    const title = this.props.title;
-
-    return (
-      <header className="form__header">
-        <h2 className="form__title">{title}</h2>
-      </header>
     );
   }
 }
@@ -59,62 +48,4 @@ class PersonalInfoField extends React.Component {
   }
 }
 
-class FormRow extends React.Component {
-  render() {
-    const children = this.props.children;
-
-    return children.length >= 2 ? (
-      <div className="form__row row">{children}</div>
-    ) : (
-      <div className="form__row">{children}</div>
-    );
-  }
-}
-
-class TwoColumnsFormRow extends React.Component {
-  render() {
-    const firstItem = this.props.firstItem;
-    const secondItem = this.props.secondItem;
-
-    return (
-      <FormRow>
-        {firstItem}
-        {secondItem}
-      </FormRow>
-    );
-  }
-}
-
-class FormItem extends React.Component {
-  render() {
-    const name = this.props.name;
-    const type = this.props.type;
-
-    return (
-      <div className="col">
-        <label className="form__label">{name}</label>
-        <input className="form__input" name={name} type={type} />
-      </div>
-    );
-  }
-}
-
-class FormBtn extends React.Component {
-  render() {
-    return (
-      <button type="submit" class="form__btn">
-        Next Step
-        <NextIcon />
-      </button>
-    );
-  }
-}
-
-export {
-  PersonalForm,
-  FormTitle,
-  FormRow,
-  TwoColumnsFormRow,
-  FormItem,
-  FormBtn,
-};
+export { PersonalForm, FormTitle, FormRow, TwoColumnsFormRow, FormItem };
