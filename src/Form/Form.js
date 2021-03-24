@@ -41,13 +41,18 @@ class TwoColumnsFormRow extends React.Component {
 
 class FormItem extends React.Component {
   render() {
-    const name = this.props.name;
-    const type = this.props.type;
+    const { labelName, name, type, handleChange, value } = this.props;
 
     return (
       <div className="col">
-        <label className="form__label">{name}</label>
-        <input className="form__input" name={name} type={type} />
+        <label className="form__label">{labelName}</label>
+        <input
+          className="form__input"
+          value={value}
+          name={name}
+          type={type}
+          onChange={handleChange}
+        />
       </div>
     );
   }
@@ -55,12 +60,17 @@ class FormItem extends React.Component {
 
 class FormItemTextArea extends React.Component {
   render() {
-    const name = this.props.name;
+    const { name, labelName, handleChange, value } = this.props;
 
     return (
       <div className="col">
-        <label className="form__label">{name}</label>
-        <textarea className="form__input" name={name} />
+        <label className="form__label">{labelName}</label>
+        <textarea
+          className="form__input"
+          value={value}
+          name={name}
+          onChange={handleChange}
+        />
       </div>
     );
   }
@@ -68,8 +78,17 @@ class FormItemTextArea extends React.Component {
 
 class FormItemMonth extends React.Component {
   render() {
+    const { month, name, handleChange } = this.props;
+    console.log({ month, name, handleChange });
+    console.log(handleChange);
+
     return (
-      <select className="form__input col">
+      <select
+        value={month}
+        name={name}
+        onChange={handleChange}
+        className="form__input col"
+      >
         <option>Don't Show This</option>
         <option>Show Year Only</option>
         <option>January</option>
@@ -90,17 +109,22 @@ class FormItemMonth extends React.Component {
 
 class FormItemYear extends React.Component {
   render() {
-    console.log(this.props);
+    const { year, name, handleChange } = this.props;
 
-    const startYear = 1960;
+    const beginningYear = 1960;
     const currentYear = 2021;
-    const emptyArray = Array(currentYear - startYear + 1).fill(null);
+    const emptyArray = Array(currentYear - beginningYear + 1).fill(null);
     const years = emptyArray.map((year, yearToAdd) => {
-      return startYear + yearToAdd;
+      return beginningYear + yearToAdd;
     });
 
     return (
-      <select className="form__input col">
+      <select
+        value={year}
+        name={name}
+        onChange={handleChange}
+        className="form__input col"
+      >
         {years.map((year) => (
           <option key={uniqid()}>{year}</option>
         ))}
