@@ -103,7 +103,21 @@ class WorkForm extends React.Component {
 
   handleDelete(e) {
     e.preventDefault();
-    console.log('delete bro');
+    this.setState({
+      isEditing: false,
+      editCardNumber: null,
+      formInfoIsPresent: false,
+      currentInfo: {
+        jobTitle: '',
+        city: '',
+        employer: '',
+        description: '',
+        startMonth: "Don't Show This",
+        startYear: 1960,
+        endMonth: "Don't Show This",
+        endYear: 1960,
+      },
+    });
   }
 
   handleFormCardDelete(formCardNumber) {
