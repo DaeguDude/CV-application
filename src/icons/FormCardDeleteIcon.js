@@ -2,8 +2,10 @@ import React from 'react';
 
 class FormCardDeleteIcon extends React.Component {
   render() {
+    const handleFormCardDelete = this.props.handleFormCardDelete;
     return (
       <svg
+        onClick={handleFormCardDelete}
         className="form__card-icon form__card-delete"
         xmlns="http://www.w3.org/2000/svg"
         height="24"

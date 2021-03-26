@@ -17,10 +17,13 @@ class FormNextStepBtn extends React.Component {
 
 class FormSmallBtns extends React.Component {
   render() {
+    const handleSave = this.props.handleSave;
+    const handleDelete = this.props.handleDelete;
+
     return (
       <div className="form__small-btns">
-        <FormDeleteBtn />
-        <FormSaveBtn />
+        <FormDeleteBtn handleDelete={handleDelete} />
+        <FormSaveBtn handleSave={handleSave} />
       </div>
     );
   }
@@ -28,8 +31,9 @@ class FormSmallBtns extends React.Component {
 
 class FormDeleteBtn extends React.Component {
   render() {
+    const handleDelete = this.props.handleDelete;
     return (
-      <button className="form__small-btn">
+      <button onClick={handleDelete} className="form__small-btn">
         <DeleteIcon />
         <span>Delete</span>
       </button>
@@ -39,8 +43,10 @@ class FormDeleteBtn extends React.Component {
 
 class FormSaveBtn extends React.Component {
   render() {
+    const handleSave = this.props.handleSave;
+
     return (
-      <button className="form__small-btn">
+      <button onClick={handleSave} className="form__small-btn">
         <SaveIcon />
         <span>Save</span>
       </button>
@@ -50,8 +56,12 @@ class FormSaveBtn extends React.Component {
 
 class FormAddAnotherBtn extends React.Component {
   render() {
+    const { handleAddAnotherExperience } = this.props;
     return (
-      <button className="form__add-another-btn">
+      <button
+        onClick={handleAddAnotherExperience}
+        className="form__add-another-btn"
+      >
         <PlusIcon />
         <span>Add another work experience</span>
       </button>

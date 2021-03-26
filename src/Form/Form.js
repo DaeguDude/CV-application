@@ -79,8 +79,6 @@ class FormItemTextArea extends React.Component {
 class FormItemMonth extends React.Component {
   render() {
     const { month, name, handleChange } = this.props;
-    console.log({ month, name, handleChange });
-    console.log(handleChange);
 
     return (
       <select

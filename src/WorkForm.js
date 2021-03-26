@@ -10,6 +10,7 @@ import {
 } from './Form/Form';
 import { FormCard } from './Form/FormCard';
 import { FormSmallBtns, FormAddAnotherBtn } from './Form/FormBtns';
+import uniqid from 'uniqid';
 
 class WorkForm extends React.Component {
   constructor(props) {
@@ -26,9 +27,16 @@ class WorkForm extends React.Component {
         endMonth: "Don't Show This",
         endYear: 1960,
       },
+      formInfoIsPresent: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSave = this.handleSave.bind(this);
+    this.handleAddAnotherExperience = this.handleAddAnotherExperience.bind(
+      this
+    );
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleFormCardDelete = this.handleFormCardDelete.bind(this);
   }
 
   handleChange(e) {
@@ -43,14 +51,74 @@ class WorkForm extends React.Component {
     });
   }
 
+  handleSave(e) {
+    e.preventDefault();
+    this.setState({
+      history: this.state.history.concat(this.state.currentInfo),
+      currentInfo: {
+        jobTitle: '',
+        city: '',
+        employer: '',
+        description: '',
+        startMonth: "Don't Show This",
+        startYear: 1960,
+        endMonth: "Don't Show This",
+        endYear: 1960,
+      },
+      formInfoIsPresent: false,
+    });
+  }
+
+  handleAddAnotherExperience(e) {
+    e.preventDefault();
+    this.setState({
+      formInfoIsPresent: true,
+    });
+  }
+
+  handleDelete(e) {
+    e.preventDefault();
+    console.log('delete bro');
+  }
+
+  handleFormCardDelete(formCardNumber) {
+    const newHistory = this.state.history.slice();
+    newHistory.splice(formCardNumber, 1);
+    this.setState({
+      history: newHistory,
+    });
+  }
+
   render() {
+    let listItem;
+    if (this.state.history.length > 0) {
+      listItem = this.state.history.map((workInfo, itemNumber) => {
+        return (
+          <FormCard
+            key={uniqid()}
+            workInfo={workInfo}
+            handleFormCardDelete={() => this.handleFormCardDelete(itemNumber)}
+          />
+        );
+      });
+    }
+
     return (
       <form className="form">
         <div className="form__content">
           <FormTitle title="Work Experiences" />
-          <FormInfoField
-            currentInfo={this.state.currentInfo}
-            handleChange={this.handleChange}
+          {listItem}
+          {this.state.formInfoIsPresent && (
+            <FormInfoField
+              currentInfo={this.state.currentInfo}
+              handleChange={this.handleChange}
+              handleSave={this.handleSave}
+              handleDelete={this.handleDelete}
+            />
+          )}
+
+          <FormAddAnotherBtn
+            handleAddAnotherExperience={this.handleAddAnotherExperience}
           />
         </div>
       </form>
@@ -61,7 +129,9 @@ class WorkForm extends React.Component {
 class FormInfoField extends React.Component {
   render() {
     const handleChange = this.props.handleChange;
+    const handleSave = this.props.handleSave;
     const currentInfo = this.props.currentInfo;
+    const handleDelete = this.props.handleDelete;
 
     return (
       <div className="form__info-field">
@@ -124,8 +194,7 @@ class FormInfoField extends React.Component {
           />
         </FormRow>
 
-        <FormSmallBtns />
-        <FormAddAnotherBtn />
+        <FormSmallBtns handleSave={handleSave} handleDelete={handleDelete} />
       </div>
     );
   }
