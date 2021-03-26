@@ -12,6 +12,7 @@ class FormCard extends React.Component {
       endYear,
     } = this.props.workInfo;
     const handleFormCardDelete = this.props.handleFormCardDelete;
+    const handleFormCardEdit = this.props.handleFormCardEdit;
 
     return (
       <div className="form__card">
@@ -23,7 +24,7 @@ class FormCard extends React.Component {
         </div>
         <div className="form__card-icons">
           <FormCardDeleteIcon handleFormCardDelete={handleFormCardDelete} />
-          <FormCardEditIcon />
+          <FormCardEditIcon handleFormCardEdit={handleFormCardEdit} />
         </div>
       </div>
     );

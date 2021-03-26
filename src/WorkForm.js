@@ -27,6 +27,8 @@ class WorkForm extends React.Component {
         endMonth: "Don't Show This",
         endYear: 1960,
       },
+      isEditing: false,
+      editCardNumber: null,
       formInfoIsPresent: false,
     };
 
@@ -37,6 +39,7 @@ class WorkForm extends React.Component {
     );
     this.handleDelete = this.handleDelete.bind(this);
     this.handleFormCardDelete = this.handleFormCardDelete.bind(this);
+    this.handleFormCardEdit = this.handleFormCardEdit.bind(this);
   }
 
   handleChange(e) {
@@ -53,20 +56,42 @@ class WorkForm extends React.Component {
 
   handleSave(e) {
     e.preventDefault();
-    this.setState({
-      history: this.state.history.concat(this.state.currentInfo),
-      currentInfo: {
-        jobTitle: '',
-        city: '',
-        employer: '',
-        description: '',
-        startMonth: "Don't Show This",
-        startYear: 1960,
-        endMonth: "Don't Show This",
-        endYear: 1960,
-      },
-      formInfoIsPresent: false,
-    });
+    if (this.state.isEditing) {
+      const newHistory = this.state.history.slice();
+      newHistory.splice(this.state.editCardNumber, 1, this.state.currentInfo);
+      this.setState({
+        history: newHistory,
+        currentInfo: {
+          jobTitle: '',
+          city: '',
+          employer: '',
+          description: '',
+          startMonth: "Don't Show This",
+          startYear: 1960,
+          endMonth: "Don't Show This",
+          endYear: 1960,
+        },
+        isEditing: false,
+        editCardNumber: null,
+      });
+    } else {
+      this.setState({
+        history: this.state.history.concat(this.state.currentInfo),
+        currentInfo: {
+          jobTitle: '',
+          city: '',
+          employer: '',
+          description: '',
+          startMonth: "Don't Show This",
+          startYear: 1960,
+          endMonth: "Don't Show This",
+          endYear: 1960,
+        },
+        isEditing: false,
+        editCardNumber: null,
+        formInfoIsPresent: false,
+      });
+    }
   }
 
   handleAddAnotherExperience(e) {
@@ -89,15 +114,37 @@ class WorkForm extends React.Component {
     });
   }
 
+  handleFormCardEdit(formCardNumber) {
+    console.log(`edit Formcard ${formCardNumber}`);
+    this.setState({
+      isEditing: true,
+      editCardNumber: formCardNumber,
+      currentInfo: this.state.history[formCardNumber],
+    });
+  }
+
   render() {
     let listItem;
-    if (this.state.history.length > 0) {
-      listItem = this.state.history.map((workInfo, itemNumber) => {
+    const { history, editCardNumber } = this.state;
+    if (history.length > 0) {
+      listItem = history.map((workInfo, itemNumber) => {
+        if (editCardNumber === itemNumber) {
+          return (
+            <FormInfoField
+              currentInfo={this.state.currentInfo}
+              handleChange={this.handleChange}
+              handleSave={this.handleSave}
+              handleDelete={this.handleDelete}
+            />
+          );
+        }
+
         return (
           <FormCard
             key={uniqid()}
             workInfo={workInfo}
             handleFormCardDelete={() => this.handleFormCardDelete(itemNumber)}
+            handleFormCardEdit={() => this.handleFormCardEdit(itemNumber)}
           />
         );
       });

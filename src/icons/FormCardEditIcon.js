@@ -2,8 +2,10 @@ import React from 'react';
 
 class FormCardEditIcon extends React.Component {
   render() {
+    const handleFormCardEdit = this.props.handleFormCardEdit;
     return (
       <svg
+        onClick={handleFormCardEdit}
         className="form__card-icon form__card-edit"
         xmlns="http://www.w3.org/2000/svg"
         height="24"
