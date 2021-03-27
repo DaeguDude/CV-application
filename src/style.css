@@ -23,6 +23,11 @@ button {
 Re-usable Classes
 ******************/
 
+.container {
+  max-width: 850px;
+  margin: 0 auto;
+}
+
 .row {
   display: flex;
 }
@@ -35,6 +40,18 @@ Re-usable Classes
   margin-left: 1.5em;
 }
 
+/*****************
+Layout
+******************/
+
+.page-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  margin-bottom: 0.75em;
+}
 /*****************
 Form
 ******************/
@@ -106,7 +123,6 @@ Form
   border: none;
   border-radius: 4px;
 
-  /* top | right | bottom | left */
   padding: 0.5em 2em 0.5em 3em;
   display: inline-block;
 
@@ -187,7 +203,9 @@ Form
   margin-right: 0.2rem;
 }
 
-/* FormCard */
+/*****************
+Form Card
+******************/
 
 .form__card {
   display: flex;
@@ -220,4 +238,77 @@ Form
 
 .form__card-edit:hover {
   fill: #2fb9ff;
+}
+
+/* Progress Bar */
+
+.progress-bar {
+  margin: 0 auto;
+  margin-bottom: 2em;
+  position: relative;
+  max-width: 600px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-bar__bar {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  background: #81e1a9;
+  height: 8px;
+  border-radius: 5px;
+  box-shadow: 0 7px 14px 0 rgba(59, 65, 94, 0.1),
+    0 3px 6px 0 rgba(0, 0, 0, 0.07);
+}
+
+.progress-bar__filler {
+  background: #6169cf;
+}
+
+.progress-bar__buttons {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: 0;
+  padding: 0;
+
+  top: -24px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.progress-bar__button {
+  background: #81e1a9;
+  margin: 0;
+  padding: 0;
+  height: 38px;
+  width: 38px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-bar__button--completed {
+  background: #6169cf;
+}
+
+.progress-bar__icon {
+  fill: #1fc565;
+}
+
+.progress-bar__icon--completed {
+  fill: #fff;
+}
+
+.progress-bar__label {
+  position: absolute;
+  color: #fff;
+  top: 40px;
 }
