@@ -1,5 +1,4 @@
 import React from 'react';
-import { FormNextStepBtn } from './Form/FormBtns';
 import { FormTitle, FormRow, TwoColumnsFormRow, FormItem } from './Form/Form';
 
 class PersonalForm extends React.Component {
@@ -9,9 +8,6 @@ class PersonalForm extends React.Component {
         <div className="form__content">
           <FormTitle title="Personal Details" />
           <PersonalInfoField />
-        </div>
-        <div className="form__footer">
-          <FormNextStepBtn />
         </div>
       </form>
     );
@@ -23,29 +19,35 @@ class PersonalInfoField extends React.Component {
     return (
       <div>
         <FormRow>
-          <FormItem name="First name" type="text" />
+          <FormItem labelName="First name" name="First name" type="text" />
         </FormRow>
 
         <FormRow>
-          <FormItem name="Last name" type="text" />
+          <FormItem labelName="Last name" name="Last name" type="text" />
         </FormRow>
 
         <TwoColumnsFormRow
-          firstItem={<FormItem name="Email" type="email" />}
-          secondItem={<FormItem name="Phone number" type="tel" />}
+          firstItem={<FormItem labelName="Email" name="Email" type="email" />}
+          secondItem={
+            <FormItem labelName="Phone number" name="Phone number" type="tel" />
+          }
         />
 
         <FormRow>
-          <FormItem name="Last name" type="text" />
+          <FormItem labelName="Last name" name="Last name" type="text" />
         </FormRow>
 
         <TwoColumnsFormRow
-          firstItem={<FormItem name="Zip code" type="text" />}
-          secondItem={<FormItem name="City/Town" type="text" />}
+          firstItem={
+            <FormItem labelName="Zip code" name="Zip code" type="text" />
+          }
+          secondItem={
+            <FormItem labelName="City/Town" name="City/Town" type="text" />
+          }
         />
       </div>
     );
   }
 }
 
-export { PersonalForm, FormTitle, FormRow, TwoColumnsFormRow, FormItem };
+export default PersonalForm;
