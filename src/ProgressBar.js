@@ -1,28 +1,62 @@
 import React from 'react';
 
+// const currentInfo = ['Personal', 'Experiences', 'Template']
+
 class ProgressBar extends React.Component {
   render() {
+    const currentPage = this.props.currentPage;
+
+    let isCompletedList = [];
+    let progressBarFillerWidth;
+    if (currentPage === 'personal') {
+      isCompletedList.push(true, false, false);
+      progressBarFillerWidth = 'quarter';
+    } else if (currentPage === 'experiences') {
+      isCompletedList.push(true, true, false);
+      progressBarFillerWidth = 'half';
+    } else if (currentPage === 'template') {
+      isCompletedList.push(true, true, true);
+      progressBarFillerWidth = 'full';
+    }
+
     return (
       <div className="progress-bar">
         <div className="progress-bar__bar">
-          <div className="progress-bar__filler"></div>
+          <ProgressBarFiller width={progressBarFillerWidth} />
         </div>
         <div className="progress-bar__buttons">
-          <button className="progress-bar__button">
-            <PersonIcon />
-            <ProgressBarLabel label="Personal" />
-          </button>
-          <button className="progress-bar__button">
-            <DocumentIcon />
-            <ProgressBarLabel label="Experiences" />
-          </button>
-          <button className="progress-bar__button">
-            <CreateIcon />
-            <ProgressBarLabel label="Template" />
-          </button>
+          <PersonProgressBarBtn
+            label="Personal"
+            isCompleted={isCompletedList[0]}
+          />
+          <DocumentProgressBarBtn
+            label="Experiences"
+            isCompleted={isCompletedList[1]}
+          />
+          <CreateProgressBarBtn
+            label="Experiences"
+            isCompleted={isCompletedList[2]}
+          />
         </div>
       </div>
     );
+  }
+}
+
+class ProgressBarFiller extends React.Component {
+  render() {
+    const width = this.props.width;
+
+    let classes;
+    if (width === 'quarter') {
+      classes = 'progress-bar__filler progress-bar__filler--quarter';
+    } else if (width === 'half') {
+      classes = 'progress-bar__filler progress-bar__filler--half';
+    } else if (width === 'full') {
+      classes = 'progress-bar__filler progress-bar__filler--full';
+    }
+
+    return <div className={classes}></div>;
   }
 }
 
@@ -30,15 +64,71 @@ class ProgressBarLabel extends React.Component {
   render() {
     const label = this.props.label;
 
-    return <div class="progress-bar__label">{label}</div>;
+    return <div className="progress-bar__label">{label}</div>;
+  }
+}
+
+class ProgressBarBtn extends React.Component {
+  render() {
+    console.log(this.props.children);
+
+    const { isCompleted } = this.props;
+    const className = isCompleted
+      ? 'progress-bar__button progress-bar__button--completed'
+      : 'progress-bar__button';
+
+    return <button className={className}>{this.props.children}</button>;
+  }
+}
+
+class PersonProgressBarBtn extends React.Component {
+  render() {
+    const isCompleted = this.props.isCompleted;
+
+    return (
+      <ProgressBarBtn isCompleted={isCompleted}>
+        <PersonIcon isCompleted={isCompleted} />
+        <ProgressBarLabel label="Personal" />
+      </ProgressBarBtn>
+    );
+  }
+}
+
+class DocumentProgressBarBtn extends React.Component {
+  render() {
+    const isCompleted = this.props.isCompleted;
+
+    return (
+      <ProgressBarBtn isCompleted={isCompleted}>
+        <DocumentIcon isCompleted={isCompleted} />
+        <ProgressBarLabel label="Experiences" />
+      </ProgressBarBtn>
+    );
+  }
+}
+
+class CreateProgressBarBtn extends React.Component {
+  render() {
+    const isCompleted = this.props.isCompleted;
+
+    return (
+      <ProgressBarBtn isCompleted={isCompleted}>
+        <CreateIcon isCompleted={isCompleted} />
+        <ProgressBarLabel label="Template" />
+      </ProgressBarBtn>
+    );
   }
 }
 
 class PersonIcon extends React.Component {
   render() {
+    const className = this.props.isCompleted
+      ? 'progress-bar__icon progress-bar__icon--completed'
+      : 'progress-bar__icon';
+
     return (
       <svg
-        className="progress-bar__icon"
+        className={className}
         xmlns="http://www.w3.org/2000/svg"
         height="24"
         viewBox="0 0 24 24"
@@ -53,9 +143,13 @@ class PersonIcon extends React.Component {
 
 class DocumentIcon extends React.Component {
   render() {
+    const className = this.props.isCompleted
+      ? 'progress-bar__icon progress-bar__icon--completed'
+      : 'progress-bar__icon';
+
     return (
       <svg
-        className="progress-bar__icon"
+        className={className}
         xmlns="http://www.w3.org/2000/svg"
         enable-background="new 0 0 24 24"
         height="24"
@@ -73,9 +167,13 @@ class DocumentIcon extends React.Component {
 
 class CreateIcon extends React.Component {
   render() {
+    const className = this.props.isCompleted
+      ? 'progress-bar__icon progress-bar__icon--completed'
+      : 'progress-bar__icon';
+
     return (
       <svg
-        className="progress-bar__icon"
+        className={className}
         xmlns="http://www.w3.org/2000/svg"
         height="24"
         viewBox="0 0 24 24"
