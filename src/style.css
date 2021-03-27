@@ -6,6 +6,8 @@
 
 body {
   font-family: 'Roboto', sans-serif;
+  position: relative;
+  padding-bottom: 5rem;
 }
 
 /*****************
@@ -17,10 +19,6 @@ button {
   border: none;
   cursor: pointer;
   background: none;
-}
-
-#root {
-  position: relative;
 }
 
 /*****************
@@ -75,6 +73,7 @@ Form
 
 .form {
   max-width: 850px;
+  padding-top: 2em;
 }
 
 .form__content {
@@ -261,7 +260,6 @@ Form Card
 
 .progress-bar {
   margin: 0 auto;
-  margin-bottom: 2em;
   position: relative;
   max-width: 600px;
 
