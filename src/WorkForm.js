@@ -12,21 +12,23 @@ import { FormCard } from './Form/FormCard';
 import { FormSmallBtns, FormAddAnotherBtn } from './Form/FormBtns';
 import uniqid from 'uniqid';
 
+const initialWorkInfo = {
+  jobTitle: '',
+  city: '',
+  employer: '',
+  description: '',
+  startMonth: "Don't Show This",
+  startYear: 1960,
+  endMonth: "Don't Show This",
+  endYear: 1960,
+};
+
 class WorkForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       history: [],
-      currentInfo: {
-        jobTitle: '',
-        city: '',
-        employer: '',
-        description: '',
-        startMonth: "Don't Show This",
-        startYear: 1960,
-        endMonth: "Don't Show This",
-        endYear: 1960,
-      },
+      currentInfo: initialWorkInfo,
       isEditing: false,
       editCardNumber: null,
       formInfoIsPresent: false,
@@ -61,32 +63,14 @@ class WorkForm extends React.Component {
       newHistory.splice(this.state.editCardNumber, 1, this.state.currentInfo);
       this.setState({
         history: newHistory,
-        currentInfo: {
-          jobTitle: '',
-          city: '',
-          employer: '',
-          description: '',
-          startMonth: "Don't Show This",
-          startYear: 1960,
-          endMonth: "Don't Show This",
-          endYear: 1960,
-        },
+        currentInfo: initialWorkInfo,
         isEditing: false,
         editCardNumber: null,
       });
     } else {
       this.setState({
         history: this.state.history.concat(this.state.currentInfo),
-        currentInfo: {
-          jobTitle: '',
-          city: '',
-          employer: '',
-          description: '',
-          startMonth: "Don't Show This",
-          startYear: 1960,
-          endMonth: "Don't Show This",
-          endYear: 1960,
-        },
+        currentInfo: initialWorkInfo,
         isEditing: false,
         editCardNumber: null,
         formInfoIsPresent: false,
@@ -107,16 +91,7 @@ class WorkForm extends React.Component {
       isEditing: false,
       editCardNumber: null,
       formInfoIsPresent: false,
-      currentInfo: {
-        jobTitle: '',
-        city: '',
-        employer: '',
-        description: '',
-        startMonth: "Don't Show This",
-        startYear: 1960,
-        endMonth: "Don't Show This",
-        endYear: 1960,
-      },
+      currentInfo: initialWorkInfo,
     });
   }
 
@@ -129,7 +104,6 @@ class WorkForm extends React.Component {
   }
 
   handleFormCardEdit(formCardNumber) {
-    console.log(`edit Formcard ${formCardNumber}`);
     this.setState({
       isEditing: true,
       editCardNumber: formCardNumber,
@@ -180,6 +154,7 @@ class WorkForm extends React.Component {
 
           <FormAddAnotherBtn
             handleAddAnotherExperience={this.handleAddAnotherExperience}
+            text="Add Another Work Experience"
           />
         </div>
       </form>

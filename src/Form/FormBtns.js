@@ -56,14 +56,15 @@ class FormSaveBtn extends React.Component {
 
 class FormAddAnotherBtn extends React.Component {
   render() {
-    const { handleAddAnotherExperience } = this.props;
+    const { text, handleAddAnotherExperience } = this.props;
+
     return (
       <button
         onClick={handleAddAnotherExperience}
         className="form__add-another-btn"
       >
         <PlusIcon />
-        <span>Add another work experience</span>
+        <span>{text}</span>
       </button>
     );
   }
