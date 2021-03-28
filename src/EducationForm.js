@@ -108,6 +108,7 @@ class EducationForm extends React.Component {
       isEditing: true,
       editCardNumber: formCardNumber,
       currentInfo: this.state.history[formCardNumber],
+      formInfoIsPresent: false,
     });
   }
 
