@@ -25,7 +25,9 @@ class Header extends React.Component {
   render() {
     return (
       <header className="header">
-        <a className="page-logo">CVMaker</a>
+        <a class="page-logo">
+          <span>CV</span>maker
+        </a>
       </header>
     );
   }
