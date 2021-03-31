@@ -9,6 +9,7 @@ import ProgressBar from './ProgressBar';
 import React from 'react';
 import HeadingBg from './HeadingBg';
 import NextStep from './NextStep';
+import Template from './Template';
 
 function App() {
   return (
@@ -70,6 +71,8 @@ class Main extends React.Component {
           <EducationForm />
         </div>
       );
+    } else {
+      page = <Template />;
     }
 
     return (

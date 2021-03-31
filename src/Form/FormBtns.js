@@ -4,17 +4,6 @@ import SaveIcon from '../icons/SaveIcon';
 import PlusIcon from '../icons/PlusIcon';
 import NextIcon from '../icons/NextIcon';
 
-class FormNextStepBtn extends React.Component {
-  render() {
-    return (
-      <button type="submit" class="form__btn">
-        Next Step
-        <NextIcon />
-      </button>
-    );
-  }
-}
-
 class FormSmallBtns extends React.Component {
   render() {
     const handleSave = this.props.handleSave;
@@ -70,4 +59,4 @@ class FormAddAnotherBtn extends React.Component {
   }
 }
 
-export { FormNextStepBtn, FormSmallBtns, FormAddAnotherBtn };
+export { FormSmallBtns, FormAddAnotherBtn };

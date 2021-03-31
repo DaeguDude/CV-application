@@ -368,3 +368,71 @@ Form Card
   background: #2dc46a;
   clip-path: polygon(0 0, 100% 0, 100% 46%, 0 67%);
 }
+
+/* Template */
+
+.template {
+  margin-top: 2em;
+  color: #424242;
+  padding: 1.5em;
+
+  border-radius: 4px;
+  box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+  background: #fff;
+}
+
+.template__section {
+  margin-top: 2em;
+}
+
+.template__section--header {
+  padding: 1em 0;
+  background: #e1e1e1;
+}
+
+.template__section--title {
+  font-weight: 500;
+  font-size: 1.4rem;
+}
+
+.template__section--row {
+  margin-top: 1.5em;
+}
+
+.template__info-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.template__info-title {
+  font-weight: 500;
+}
+
+.template__info-subtitle {
+  font-style: italic;
+  margin-top: 0.25em;
+}
+
+.template__info-text {
+  margin-top: 0.5em;
+}
+
+/* template section personal */
+
+.template__section--personal--main {
+  margin: 1.25em 0;
+}
+
+.template__section--personal--row {
+  display: flex;
+}
+
+.personal__label {
+  font-size: 1.1rem;
+  min-width: 150px;
+}
+
+.personal__info {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
