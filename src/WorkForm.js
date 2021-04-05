@@ -38,12 +38,6 @@ class WorkForm extends React.Component {
 
   handleChange(e) {
     this.props.onHandleChange(e);
-
-    // this.setState({
-    //   currentInfo: Object.assign({}, this.state.currentInfo, {
-    //     [name]: value,
-    //   }),
-    // });
   }
 
   handleSave(e) {
@@ -73,13 +67,14 @@ class WorkForm extends React.Component {
   }
 
   handleDelete(e) {
-    e.preventDefault();
-    this.setState({
-      isEditing: false,
-      editCardNumber: null,
-      formInfoIsPresent: false,
-      currentInfo: initialWorkInfo,
-    });
+    this.props.onHandleDelete(e);
+    // e.preventDefault();
+    // this.setState({
+    //   isEditing: false,
+    //   editCardNumber: null,
+    //   formInfoIsPresent: false,
+    //   currentInfo: initialWorkInfo,
+    // });
   }
 
   handleFormCardDelete(formCardNumber) {

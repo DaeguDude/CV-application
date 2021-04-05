@@ -64,6 +64,7 @@ class Main extends React.Component {
       this
     );
     this.onHandleChange = this.onHandleChange.bind(this);
+    this.onHandleDelete = this.onHandleDelete.bind(this);
   }
 
   handleNext(e) {
@@ -107,6 +108,19 @@ class Main extends React.Component {
     }));
   }
 
+  onHandleDelete(e) {
+    e.preventDefault();
+    this.setState((prevState) => ({
+      work: {
+        ...prevState.work,
+        isEditing: false,
+        editCardNumber: null,
+        formInfoIsPresent: false,
+        currentInfo: initialWorkInfo,
+      },
+    }));
+  }
+
   render() {
     const currentPage = this.state.currentPage;
     let page;
@@ -119,6 +133,7 @@ class Main extends React.Component {
             work={this.state.work}
             onHandleAddAnotherExperience={this.onHandleAddAnotherExperience}
             onHandleChange={this.onHandleChange}
+            onHandleDelete={this.onHandleDelete}
           />
           <EducationForm />
         </div>
