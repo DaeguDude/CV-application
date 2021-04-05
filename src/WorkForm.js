@@ -41,25 +41,7 @@ class WorkForm extends React.Component {
   }
 
   handleSave(e) {
-    e.preventDefault();
-    if (this.state.isEditing) {
-      const newHistory = this.state.history.slice();
-      newHistory.splice(this.state.editCardNumber, 1, this.state.currentInfo);
-      this.setState({
-        history: newHistory,
-        currentInfo: initialWorkInfo,
-        isEditing: false,
-        editCardNumber: null,
-      });
-    } else {
-      this.setState({
-        history: this.state.history.concat(this.state.currentInfo),
-        currentInfo: initialWorkInfo,
-        isEditing: false,
-        editCardNumber: null,
-        formInfoIsPresent: false,
-      });
-    }
+    this.props.onHandleSave(e);
   }
 
   handleAddAnotherExperience(e) {
@@ -68,13 +50,6 @@ class WorkForm extends React.Component {
 
   handleDelete(e) {
     this.props.onHandleDelete(e);
-    // e.preventDefault();
-    // this.setState({
-    //   isEditing: false,
-    //   editCardNumber: null,
-    //   formInfoIsPresent: false,
-    //   currentInfo: initialWorkInfo,
-    // });
   }
 
   handleFormCardDelete(formCardNumber) {
@@ -86,12 +61,7 @@ class WorkForm extends React.Component {
   }
 
   handleFormCardEdit(formCardNumber) {
-    this.setState({
-      isEditing: true,
-      editCardNumber: formCardNumber,
-      currentInfo: this.state.history[formCardNumber],
-      formInfoIsPresent: false,
-    });
+    this.props.onHandleFormCardEdit(formCardNumber);
   }
 
   render() {
