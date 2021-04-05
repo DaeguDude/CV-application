@@ -26,14 +26,6 @@ const initialWorkInfo = {
 class WorkForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      history: [],
-      currentInfo: initialWorkInfo,
-      isEditing: false,
-      editCardNumber: null,
-      formInfoIsPresent: false,
-    };
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.handleAddAnotherExperience = this.handleAddAnotherExperience.bind(
@@ -45,15 +37,13 @@ class WorkForm extends React.Component {
   }
 
   handleChange(e) {
-    const target = e.target;
-    const value = target.value;
-    const name = target.name;
+    this.props.onHandleChange(e);
 
-    this.setState({
-      currentInfo: Object.assign({}, this.state.currentInfo, {
-        [name]: value,
-      }),
-    });
+    // this.setState({
+    //   currentInfo: Object.assign({}, this.state.currentInfo, {
+    //     [name]: value,
+    //   }),
+    // });
   }
 
   handleSave(e) {
@@ -79,10 +69,7 @@ class WorkForm extends React.Component {
   }
 
   handleAddAnotherExperience(e) {
-    e.preventDefault();
-    this.setState({
-      formInfoIsPresent: true,
-    });
+    this.props.onHandleAddAnotherExperience(e);
   }
 
   handleDelete(e) {
@@ -113,14 +100,17 @@ class WorkForm extends React.Component {
   }
 
   render() {
+    console.log(this.props);
+    const workInformation = this.props.work;
+
     let listItem;
-    const { history, editCardNumber } = this.state;
+    const { history, editCardNumber } = workInformation;
     if (history.length > 0) {
       listItem = history.map((workInfo, itemNumber) => {
         if (editCardNumber === itemNumber) {
           return (
             <FormInfoField
-              currentInfo={this.state.currentInfo}
+              currentInfo={workInformation.currentInfo}
               handleChange={this.handleChange}
               handleSave={this.handleSave}
               handleDelete={this.handleDelete}
@@ -144,9 +134,9 @@ class WorkForm extends React.Component {
         <div className="form__content">
           <FormTitle title="Work Experiences" />
           {listItem}
-          {this.state.formInfoIsPresent && (
+          {workInformation.formInfoIsPresent && (
             <FormInfoField
-              currentInfo={this.state.currentInfo}
+              currentInfo={workInformation.currentInfo}
               handleChange={this.handleChange}
               handleSave={this.handleSave}
               handleDelete={this.handleDelete}

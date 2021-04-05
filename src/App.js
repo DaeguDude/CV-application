@@ -34,14 +34,36 @@ class Header extends React.Component {
   }
 }
 
+const initialWorkInfo = {
+  jobTitle: '',
+  city: '',
+  employer: '',
+  description: '',
+  startMonth: "Don't Show This",
+  startYear: 1960,
+  endMonth: "Don't Show This",
+  endYear: 1960,
+};
+
 class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       currentPage: 'personal',
+      work: {
+        history: [],
+        currentInfo: initialWorkInfo,
+        isEditing: false,
+        editCardNumber: null,
+        formInfoIsPresent: false,
+      },
     };
 
     this.handleNext = this.handleNext.bind(this);
+    this.onHandleAddAnotherExperience = this.onHandleAddAnotherExperience.bind(
+      this
+    );
+    this.onHandleChange = this.onHandleChange.bind(this);
   }
 
   handleNext(e) {
@@ -59,6 +81,32 @@ class Main extends React.Component {
     }
   }
 
+  onHandleAddAnotherExperience(e) {
+    e.preventDefault();
+    this.setState((prevState) => ({
+      work: {
+        ...prevState.work,
+        formInfoIsPresent: true,
+      },
+    }));
+  }
+
+  onHandleChange(e) {
+    const target = e.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState((prevState) => ({
+      work: {
+        ...prevState.work,
+        currentInfo: {
+          ...prevState.work.currentInfo,
+          [name]: value,
+        },
+      },
+    }));
+  }
+
   render() {
     const currentPage = this.state.currentPage;
     let page;
@@ -67,7 +115,11 @@ class Main extends React.Component {
     } else if (currentPage === 'experiences') {
       page = (
         <div>
-          <WorkForm />
+          <WorkForm
+            work={this.state.work}
+            onHandleAddAnotherExperience={this.onHandleAddAnotherExperience}
+            onHandleChange={this.onHandleChange}
+          />
           <EducationForm />
         </div>
       );
