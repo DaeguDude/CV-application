@@ -125,11 +125,11 @@ class Main extends React.Component {
   }
 
   onHandleFormCardDelete(formCardNumber) {
-    console.log('onHandleFormCardDelete');
     this.setState((prevState) => {
-      debugger;
       const work = Object.assign({}, prevState.work);
-      work.history.splice(formCardNumber, 1);
+      const workHistory = [...work.history];
+      workHistory.splice(formCardNumber, 1);
+      work.history = workHistory;
       return { work };
     });
   }
