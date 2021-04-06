@@ -48,8 +48,8 @@ class WorkForm extends React.Component {
     this.props.onHandleAddAnotherExperience(e);
   }
 
-  handleDelete(e) {
-    this.props.onHandleDelete(e);
+  handleDelete(e, itemNumber) {
+    this.props.onHandleDelete(e, itemNumber);
   }
 
   handleFormCardDelete(e, formCardNumber) {
@@ -73,7 +73,7 @@ class WorkForm extends React.Component {
               currentInfo={workInformation.currentInfo}
               handleChange={this.handleChange}
               handleSave={this.handleSave}
-              handleDelete={this.handleDelete}
+              handleDelete={(e) => this.handleDelete(e, itemNumber)}
             />
           );
         }

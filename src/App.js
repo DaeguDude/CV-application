@@ -111,11 +111,19 @@ class Main extends React.Component {
     }));
   }
 
-  onHandleDelete(e) {
+  onHandleDelete(e, itemNumber) {
     e.preventDefault();
+    const work = this.state.work;
+    if (work.isEditing) {
+      console.log('Item to delete: ', itemNumber);
+    }
+
     this.setState((prevState) => ({
       work: {
         ...prevState.work,
+        history: prevState.work.history.filter(
+          (workInfo, index) => index !== itemNumber
+        ),
         isEditing: false,
         editCardNumber: null,
         formInfoIsPresent: false,
