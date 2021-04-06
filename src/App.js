@@ -67,6 +67,7 @@ class Main extends React.Component {
     this.onHandleDelete = this.onHandleDelete.bind(this);
     this.onHandleSave = this.onHandleSave.bind(this);
     this.onHandleFormCardEdit = this.onHandleFormCardEdit.bind(this);
+    this.onHandleFormCardDelete = this.onHandleFormCardDelete.bind(this);
   }
 
   handleNext(e) {
@@ -123,20 +124,20 @@ class Main extends React.Component {
     }));
   }
 
+  onHandleFormCardDelete(formCardNumber) {
+    console.log('onHandleFormCardDelete');
+    this.setState((prevState) => {
+      debugger;
+      const work = Object.assign({}, prevState.work);
+      work.history.splice(formCardNumber, 1);
+      return { work };
+    });
+  }
+
   onHandleSave(e) {
     e.preventDefault();
-    console.log('MAIN: onHandleSave');
     const work = this.state.work;
     if (work.isEditing) {
-      // this.setState((prevState) => ({
-      //   work: {
-      //     history: [...prevState.work.history, prevState.work.currentInfo],
-      //     currentInfo: initialWorkInfo,
-      //     isEditing: false,
-      //     editCardNumber: null,
-      //   },
-      // }));
-
       this.setState((prevState) => {
         const work = Object.assign({}, prevState.work);
         work.history.splice(
@@ -150,15 +151,6 @@ class Main extends React.Component {
 
         return { work };
       });
-      // const newHistory = this.state.history.slice();
-      // newHistory.splice(this.state.editCardNumber, 1, this.state.currentInfo);
-      // this.setState({
-      //   history: newHistory,
-      //   currentInfo: initialWorkInfo,
-      //   isEditing: false,
-      //   editCardNumber: null,
-      // });
-      console.log('I am editing');
     } else {
       this.setState((prevState) => ({
         work: {
@@ -170,12 +162,10 @@ class Main extends React.Component {
           formInfoIsPresent: false,
         },
       }));
-      console.log('I am not editing');
     }
   }
 
   onHandleFormCardEdit(formCardNumber) {
-    console.log('MAIN: onHandleFormCardEdit');
     this.setState((prevState) => ({
       work: {
         ...prevState.work,
@@ -202,6 +192,7 @@ class Main extends React.Component {
             onHandleDelete={this.onHandleDelete}
             onHandleSave={this.onHandleSave}
             onHandleFormCardEdit={this.onHandleFormCardEdit}
+            onHandleFormCardDelete={this.onHandleFormCardDelete}
           />
           <EducationForm />
         </div>

@@ -52,12 +52,8 @@ class WorkForm extends React.Component {
     this.props.onHandleDelete(e);
   }
 
-  handleFormCardDelete(formCardNumber) {
-    const newHistory = this.state.history.slice();
-    newHistory.splice(formCardNumber, 1);
-    this.setState({
-      history: newHistory,
-    });
+  handleFormCardDelete(e, formCardNumber) {
+    this.props.onHandleFormCardDelete(formCardNumber);
   }
 
   handleFormCardEdit(formCardNumber) {
@@ -65,7 +61,6 @@ class WorkForm extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     const workInformation = this.props.work;
 
     let listItem;
@@ -87,7 +82,9 @@ class WorkForm extends React.Component {
           <FormCard
             key={uniqid()}
             workInfo={workInfo}
-            handleFormCardDelete={() => this.handleFormCardDelete(itemNumber)}
+            handleFormCardDelete={(e) =>
+              this.handleFormCardDelete(e, itemNumber)
+            }
             handleFormCardEdit={() => this.handleFormCardEdit(itemNumber)}
           />
         );

@@ -70,8 +70,6 @@ class ProgressBarLabel extends React.Component {
 
 class ProgressBarBtn extends React.Component {
   render() {
-    console.log(this.props.children);
-
     const { isCompleted } = this.props;
     const className = isCompleted
       ? 'progress-bar__button progress-bar__button--completed'
