@@ -1,7 +1,3 @@
-// import Personal from './components/Personal';
-// import Work from './components/Work';
-// import Education from './components/Education';
-
 import PersonalForm from './PersonalForm';
 import WorkForm from './WorkForm';
 import EducationForm from './EducationForm';
@@ -10,6 +6,7 @@ import React from 'react';
 import HeadingBg from './HeadingBg';
 import NextStep from './NextStep';
 import Template from './Template';
+import uniqid from 'uniqid';
 
 function App() {
   return (
@@ -52,7 +49,7 @@ class Main extends React.Component {
       currentPage: 'personal',
       work: {
         history: [],
-        currentInfo: initialWorkInfo,
+        currentInfo: getNewWorkInfo(),
         isEditing: false,
         editCardNumber: null,
         formInfoIsPresent: false,
@@ -127,7 +124,7 @@ class Main extends React.Component {
         isEditing: false,
         editCardNumber: null,
         formInfoIsPresent: false,
-        currentInfo: initialWorkInfo,
+        currentInfo: getNewWorkInfo(),
       },
     }));
   }
@@ -147,7 +144,6 @@ class Main extends React.Component {
     const work = this.state.work;
     if (work.isEditing) {
       this.setState((prevState) => {
-        // There is also a mutation here
         const work = Object.assign({}, prevState.work);
         const newHistory = work.history.slice();
         newHistory.splice(
@@ -157,7 +153,7 @@ class Main extends React.Component {
         );
 
         work.history = newHistory;
-        work.currentInfo = initialWorkInfo;
+        work.currentInfo = getNewWorkInfo();
         work.isEditing = false;
         work.editCardNumber = null;
 
@@ -168,7 +164,7 @@ class Main extends React.Component {
         work: {
           ...prevState.work,
           history: [...work.history, prevState.work.currentInfo],
-          currentInfo: initialWorkInfo,
+          currentInfo: getNewWorkInfo(),
           isEditing: false,
           editCardNumber: null,
           formInfoIsPresent: false,
@@ -224,6 +220,20 @@ class Main extends React.Component {
       </div>
     );
   }
+}
+
+function getNewWorkInfo() {
+  return {
+    id: uniqid(),
+    jobTitle: '',
+    city: '',
+    employer: '',
+    description: '',
+    startMonth: "Don't Show This",
+    startYear: 1960,
+    endMonth: "Don't Show This",
+    endYear: 1960,
+  };
 }
 
 export default App;

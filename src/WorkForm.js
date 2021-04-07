@@ -70,7 +70,7 @@ class WorkForm extends React.Component {
         if (editCardNumber === itemNumber) {
           return (
             <FormInfoField
-              key={uniqid()}
+              key={workInfo.id}
               currentInfo={workInformation.currentInfo}
               handleChange={this.handleChange}
               handleSave={this.handleSave}
@@ -81,7 +81,7 @@ class WorkForm extends React.Component {
 
         return (
           <FormCard
-            key={uniqid()}
+            key={workInfo.id}
             workInfo={workInfo}
             handleFormCardDelete={(e) =>
               this.handleFormCardDelete(e, itemNumber)
