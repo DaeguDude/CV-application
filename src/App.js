@@ -147,12 +147,16 @@ class Main extends React.Component {
     const work = this.state.work;
     if (work.isEditing) {
       this.setState((prevState) => {
+        // There is also a mutation here
         const work = Object.assign({}, prevState.work);
-        work.history.splice(
-          prevState.editCardNumber,
+        const newHistory = work.history.slice();
+        newHistory.splice(
+          prevState.work.editCardNumber,
           1,
           prevState.work.currentInfo
         );
+
+        work.history = newHistory;
         work.currentInfo = initialWorkInfo;
         work.isEditing = false;
         work.editCardNumber = null;
