@@ -70,6 +70,7 @@ class WorkForm extends React.Component {
         if (editCardNumber === itemNumber) {
           return (
             <FormInfoField
+              key={uniqid()}
               currentInfo={workInformation.currentInfo}
               handleChange={this.handleChange}
               handleSave={this.handleSave}
