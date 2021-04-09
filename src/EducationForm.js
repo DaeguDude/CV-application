@@ -12,27 +12,9 @@ import { EducationFormCard } from './Form/FormCard';
 import { FormSmallBtns, FormAddAnotherBtn } from './Form/FormBtns';
 import uniqid from 'uniqid';
 
-// const initialEducationInfo = {
-//   degree: '',
-//   city: '',
-//   school: '',
-//   startMonth: "Don't Show This",
-//   startYear: 1960,
-//   endMonth: "Don't Show This",
-//   endYear: 1960,
-//   description: '',
-// };
-
 class EducationForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      history: [],
-      currentInfo: getNewEducationInfo(),
-      isEditing: false,
-      editCardNumber: null,
-      formInfoIsPresent: false,
-    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSave = this.handleSave.bind(this);
@@ -79,10 +61,12 @@ class EducationForm extends React.Component {
   }
 
   handleAddAnotherExperience(e) {
-    e.preventDefault();
-    this.setState({
-      formInfoIsPresent: true,
-    });
+    // e.preventDefault();
+    // this.setState({
+    //   formInfoIsPresent: true,
+    // });
+
+    this.props.onHandleAddAnotherExperience(e, 'education');
   }
 
   handleDelete(e) {
@@ -113,14 +97,15 @@ class EducationForm extends React.Component {
   }
 
   render() {
+    const education = this.props.education;
     let listItem;
-    const { history, editCardNumber } = this.state;
+    const { history, editCardNumber } = education;
     if (history.length > 0) {
       listItem = history.map((educationInfo, itemNumber) => {
         if (editCardNumber === itemNumber) {
           return (
             <FormInfoField
-              currentInfo={this.state.currentInfo}
+              currentInfo={education.currentInfo}
               handleChange={this.handleChange}
               handleSave={this.handleSave}
               handleDelete={this.handleDelete}
@@ -144,9 +129,9 @@ class EducationForm extends React.Component {
         <div className="form__content">
           <FormTitle title="Education" />
           {listItem}
-          {this.state.formInfoIsPresent && (
+          {education.formInfoIsPresent && (
             <FormInfoField
-              currentInfo={this.state.currentInfo}
+              currentInfo={education.currentInfo}
               handleChange={this.handleChange}
               handleSave={this.handleSave}
               handleDelete={this.handleDelete}
@@ -283,6 +268,16 @@ class SecondItem extends React.Component {
       </div>
     );
   }
+}
+
+function getInitialEducationProperties() {
+  return {
+    history: [],
+    currentInfo: getNewEducationInfo(),
+    isEditing: false,
+    editCardNumber: null,
+    formInfoIsPresent: false,
+  };
 }
 
 function getNewEducationInfo() {

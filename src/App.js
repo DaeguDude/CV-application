@@ -43,6 +43,7 @@ class Main extends React.Component {
         editCardNumber: null,
         formInfoIsPresent: false,
       },
+      education: getInitialEducationProperties(),
     };
 
     this.handleNext = this.handleNext.bind(this);
@@ -71,17 +72,30 @@ class Main extends React.Component {
     }
   }
 
-  onHandleAddAnotherExperience(e) {
+  onHandleAddAnotherExperience(e, componentName) {
     e.preventDefault();
-    this.setState((prevState) => ({
-      work: {
-        ...prevState.work,
-        formInfoIsPresent: true,
-        isEditing: false,
-        editCardNumber: null,
-        currentInfo: getNewWorkInfo(),
-      },
-    }));
+    if (componentName === 'education') {
+      // this.setState((prevState) => ({
+      //   education: {
+      //     ...prevState.education,
+      //     formInfoIsPresent: true,
+      //     isEditing: false,
+      //     editCardNumber: null,
+      //     currentInfo: getNewEducationInfo(),
+      //   },
+      // }));
+      this.setState(educationAddAnotherExperience);
+    } else {
+      this.setState((prevState) => ({
+        work: {
+          ...prevState.work,
+          formInfoIsPresent: true,
+          isEditing: false,
+          editCardNumber: null,
+          currentInfo: getNewWorkInfo(),
+        },
+      }));
+    }
   }
 
   onHandleChange(e) {
@@ -204,7 +218,10 @@ class Main extends React.Component {
             onHandleFormCardEdit={this.onHandleFormCardEdit}
             onHandleFormCardDelete={this.onHandleFormCardDelete}
           />
-          <EducationForm />
+          <EducationForm
+            education={this.state.education}
+            onHandleAddAnotherExperience={this.onHandleAddAnotherExperience}
+          />
         </div>
       );
     } else {
@@ -235,6 +252,42 @@ function getNewWorkInfo() {
     startYear: 1960,
     endMonth: "Don't Show This",
     endYear: 1960,
+  };
+}
+
+function getInitialEducationProperties() {
+  return {
+    history: [],
+    currentInfo: getNewEducationInfo(),
+    isEditing: false,
+    editCardNumber: null,
+    formInfoIsPresent: false,
+  };
+}
+
+function getNewEducationInfo() {
+  return {
+    degree: '',
+    city: '',
+    school: '',
+    startMonth: "Don't Show This",
+    startYear: 1960,
+    endMonth: "Don't Show This",
+    endYear: 1960,
+    description: '',
+  };
+}
+
+// ADD ANOTHER EXPERIENCE
+function educationAddAnotherExperience(prevState) {
+  return {
+    education: {
+      ...prevState.education,
+      formInfoIsPresent: true,
+      isEditing: false,
+      editCardNumber: null,
+      currentInfo: getNewEducationInfo(),
+    },
   };
 }
 

@@ -12,17 +12,6 @@ import { FormCard } from './Form/FormCard';
 import { FormSmallBtns, FormAddAnotherBtn } from './Form/FormBtns';
 import uniqid from 'uniqid';
 
-const initialWorkInfo = {
-  jobTitle: '',
-  city: '',
-  employer: '',
-  description: '',
-  startMonth: "Don't Show This",
-  startYear: 1960,
-  endMonth: "Don't Show This",
-  endYear: 1960,
-};
-
 class WorkForm extends React.Component {
   constructor(props) {
     super(props);
