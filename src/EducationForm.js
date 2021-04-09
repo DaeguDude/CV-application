@@ -12,23 +12,23 @@ import { EducationFormCard } from './Form/FormCard';
 import { FormSmallBtns, FormAddAnotherBtn } from './Form/FormBtns';
 import uniqid from 'uniqid';
 
-const initialEducationInfo = {
-  degree: '',
-  city: '',
-  school: '',
-  startMonth: "Don't Show This",
-  startYear: 1960,
-  endMonth: "Don't Show This",
-  endYear: 1960,
-  description: '',
-};
+// const initialEducationInfo = {
+//   degree: '',
+//   city: '',
+//   school: '',
+//   startMonth: "Don't Show This",
+//   startYear: 1960,
+//   endMonth: "Don't Show This",
+//   endYear: 1960,
+//   description: '',
+// };
 
 class EducationForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       history: [],
-      currentInfo: initialEducationInfo,
+      currentInfo: getNewEducationInfo(),
       isEditing: false,
       editCardNumber: null,
       formInfoIsPresent: false,
@@ -63,14 +63,14 @@ class EducationForm extends React.Component {
       newHistory.splice(this.state.editCardNumber, 1, this.state.currentInfo);
       this.setState({
         history: newHistory,
-        currentInfo: initialEducationInfo,
+        currentInfo: getNewEducationInfo(),
         isEditing: false,
         editCardNumber: null,
       });
     } else {
       this.setState({
         history: this.state.history.concat(this.state.currentInfo),
-        currentInfo: initialEducationInfo,
+        currentInfo: getNewEducationInfo(),
         isEditing: false,
         editCardNumber: null,
         formInfoIsPresent: false,
@@ -91,7 +91,7 @@ class EducationForm extends React.Component {
       isEditing: false,
       editCardNumber: null,
       formInfoIsPresent: false,
-      currentInfo: initialEducationInfo,
+      currentInfo: getNewEducationInfo(),
     });
   }
 
@@ -283,6 +283,19 @@ class SecondItem extends React.Component {
       </div>
     );
   }
+}
+
+function getNewEducationInfo() {
+  return {
+    degree: '',
+    city: '',
+    school: '',
+    startMonth: "Don't Show This",
+    startYear: 1960,
+    endMonth: "Don't Show This",
+    endYear: 1960,
+    description: '',
+  };
 }
 
 export default EducationForm;
