@@ -48,16 +48,16 @@ class WorkForm extends React.Component {
     this.props.onHandleAddAnotherExperience(e);
   }
 
-  handleDelete(e, itemNumber) {
-    this.props.onHandleDelete(e, itemNumber);
+  handleDelete(e, id) {
+    this.props.onHandleDelete(e, id);
   }
 
-  handleFormCardDelete(e, formCardNumber) {
-    this.props.onHandleFormCardDelete(formCardNumber);
+  handleFormCardDelete(id) {
+    this.props.onHandleFormCardDelete(id);
   }
 
-  handleFormCardEdit(formCardNumber) {
-    this.props.onHandleFormCardEdit(formCardNumber);
+  handleFormCardEdit(id) {
+    this.props.onHandleFormCardEdit(id);
   }
 
   render() {
@@ -74,7 +74,7 @@ class WorkForm extends React.Component {
               currentInfo={workInformation.currentInfo}
               handleChange={this.handleChange}
               handleSave={this.handleSave}
-              handleDelete={(e) => this.handleDelete(e, itemNumber)}
+              handleDelete={(e) => this.handleDelete(e, workInfo.id)}
             />
           );
         }
@@ -83,10 +83,8 @@ class WorkForm extends React.Component {
           <FormCard
             key={workInfo.id}
             workInfo={workInfo}
-            handleFormCardDelete={(e) =>
-              this.handleFormCardDelete(e, itemNumber)
-            }
-            handleFormCardEdit={() => this.handleFormCardEdit(itemNumber)}
+            handleFormCardDelete={(e) => this.handleFormCardDelete(workInfo.id)}
+            handleFormCardEdit={() => this.handleFormCardEdit(workInfo.id)}
           />
         );
       });

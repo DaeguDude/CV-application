@@ -108,18 +108,18 @@ class Main extends React.Component {
     }));
   }
 
-  onHandleDelete(e, itemNumber) {
+  onHandleDelete(e, id) {
     e.preventDefault();
     const work = this.state.work;
     if (work.isEditing) {
-      console.log('Item to delete: ', itemNumber);
+      console.log('Item to delete: ', id);
     }
 
     this.setState((prevState) => ({
       work: {
         ...prevState.work,
         history: prevState.work.history.filter(
-          (workInfo, index) => index !== itemNumber
+          (workInfo) => workInfo.id !== id
         ),
         isEditing: false,
         editCardNumber: null,
@@ -129,13 +129,15 @@ class Main extends React.Component {
     }));
   }
 
-  onHandleFormCardDelete(formCardNumber) {
+  onHandleFormCardDelete(id) {
     this.setState((prevState) => {
-      const work = Object.assign({}, prevState.work);
-      const workHistory = [...work.history];
-      workHistory.splice(formCardNumber, 1);
-      work.history = workHistory;
-      return { work };
+      const newWork = Object.assign({}, prevState.work);
+      const historyWithRemovedWorkInfo = newWork.history.filter(
+        (workInfo) => workInfo.id !== id
+      );
+      newWork.history = historyWithRemovedWorkInfo;
+
+      return { work: newWork };
     });
   }
 
@@ -173,13 +175,21 @@ class Main extends React.Component {
     }
   }
 
-  onHandleFormCardEdit(formCardNumber) {
+  onHandleFormCardEdit(id) {
+    const newWorkHistory = this.state.work.history.slice();
+    const workInfoToEdit = newWorkHistory.find(
+      (workInfo) => workInfo.id === id
+    );
+    const indexOfWorkInfoToEdit = newWorkHistory.findIndex(
+      (workInfo) => workInfo.id === id
+    );
+
     this.setState((prevState) => ({
       work: {
         ...prevState.work,
         isEditing: true,
-        editCardNumber: formCardNumber,
-        currentInfo: prevState.work.history[formCardNumber],
+        editCardNumber: indexOfWorkInfoToEdit,
+        currentInfo: workInfoToEdit,
         formInfoIsPresent: false,
       },
     }));
