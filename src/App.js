@@ -31,17 +31,6 @@ class Header extends React.Component {
   }
 }
 
-const initialWorkInfo = {
-  jobTitle: '',
-  city: '',
-  employer: '',
-  description: '',
-  startMonth: "Don't Show This",
-  startYear: 1960,
-  endMonth: "Don't Show This",
-  endYear: 1960,
-};
-
 class Main extends React.Component {
   constructor(props) {
     super(props);
@@ -88,6 +77,9 @@ class Main extends React.Component {
       work: {
         ...prevState.work,
         formInfoIsPresent: true,
+        isEditing: false,
+        editCardNumber: null,
+        currentInfo: getNewWorkInfo(),
       },
     }));
   }
