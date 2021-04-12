@@ -75,15 +75,6 @@ class Main extends React.Component {
   onHandleAddAnotherExperience(e, componentName) {
     e.preventDefault();
     if (componentName === 'education') {
-      // this.setState((prevState) => ({
-      //   education: {
-      //     ...prevState.education,
-      //     formInfoIsPresent: true,
-      //     isEditing: false,
-      //     editCardNumber: null,
-      //     currentInfo: getNewEducationInfo(),
-      //   },
-      // }));
       this.setState(educationAddAnotherExperience);
     } else {
       this.setState((prevState) => ({
@@ -98,10 +89,20 @@ class Main extends React.Component {
     }
   }
 
-  onHandleChange(e) {
+  onHandleChange(e, componentName) {
     const target = e.target;
     const value = target.value;
     const name = target.name;
+
+    switch (componentName) {
+      case 'education':
+        this.setState((prevState) =>
+          educationOnHandleChange(prevState, name, value)
+        );
+        break;
+      default:
+        break;
+    }
 
     this.setState((prevState) => ({
       work: {
@@ -114,8 +115,16 @@ class Main extends React.Component {
     }));
   }
 
-  onHandleDelete(e, id) {
+  onHandleDelete(e, id, componentName) {
     e.preventDefault();
+    switch (componentName) {
+      case 'education':
+        this.setState(educationOnHandleDelete);
+        break;
+      default:
+        break;
+    }
+
     const work = this.state.work;
     if (work.isEditing) {
       console.log('Item to delete: ', id);
@@ -147,38 +156,47 @@ class Main extends React.Component {
     });
   }
 
-  onHandleSave(e) {
+  onHandleSave(e, componentName) {
     e.preventDefault();
     const work = this.state.work;
-    if (work.isEditing) {
-      this.setState((prevState) => {
-        const work = Object.assign({}, prevState.work);
-        const newHistory = work.history.slice();
-        newHistory.splice(
-          prevState.work.editCardNumber,
-          1,
-          prevState.work.currentInfo
-        );
 
-        work.history = newHistory;
-        work.currentInfo = getNewWorkInfo();
-        work.isEditing = false;
-        work.editCardNumber = null;
-
-        return { work };
-      });
-    } else {
-      this.setState((prevState) => ({
-        work: {
-          ...prevState.work,
-          history: [...work.history, prevState.work.currentInfo],
-          currentInfo: getNewWorkInfo(),
-          isEditing: false,
-          editCardNumber: null,
-          formInfoIsPresent: false,
-        },
-      }));
+    switch (componentName) {
+      case 'education':
+        this.setState(educationOnHandleSave);
+        break;
+      default:
+        break;
     }
+
+    // if (work.isEditing) {
+    //   this.setState((prevState) => {
+    //     const work = Object.assign({}, prevState.work);
+    //     const newHistory = work.history.slice();
+    //     newHistory.splice(
+    //       prevState.work.editCardNumber,
+    //       1,
+    //       prevState.work.currentInfo
+    //     );
+
+    //     work.history = newHistory;
+    //     work.currentInfo = getNewWorkInfo();
+    //     work.isEditing = false;
+    //     work.editCardNumber = null;
+
+    //     return { work };
+    //   });
+    // } else {
+    //   this.setState((prevState) => ({
+    //     work: {
+    //       ...prevState.work,
+    //       history: [...work.history, prevState.work.currentInfo],
+    //       currentInfo: getNewWorkInfo(),
+    //       isEditing: false,
+    //       editCardNumber: null,
+    //       formInfoIsPresent: false,
+    //     },
+    //   }));
+    // }
   }
 
   onHandleFormCardEdit(id) {
@@ -221,6 +239,9 @@ class Main extends React.Component {
           <EducationForm
             education={this.state.education}
             onHandleAddAnotherExperience={this.onHandleAddAnotherExperience}
+            onHandleChange={this.onHandleChange}
+            onHandleSave={this.onHandleSave}
+            onHandleDelete={this.onHandleDelete}
           />
         </div>
       );
@@ -267,6 +288,7 @@ function getInitialEducationProperties() {
 
 function getNewEducationInfo() {
   return {
+    id: uniqid(),
     degree: '',
     city: '',
     school: '',
@@ -289,6 +311,54 @@ function educationAddAnotherExperience(prevState) {
       currentInfo: getNewEducationInfo(),
     },
   };
+}
+
+function educationOnHandleChange(prevState, name, value) {
+  return {
+    education: {
+      ...prevState.education,
+      currentInfo: {
+        ...prevState.education.currentInfo,
+        [name]: value,
+      },
+    },
+  };
+}
+
+function educationOnHandleSave(prevState) {
+  const education = prevState.education;
+  if (education.isEditing) {
+    console.log('it is editing');
+  } else {
+    return {
+      education: {
+        ...prevState.education,
+        history: [
+          ...prevState.education.history,
+          prevState.education.currentInfo,
+        ],
+        currentInfo: getNewEducationInfo(),
+        formInfoIsPresent: false,
+      },
+    };
+  }
+}
+
+function educationOnHandleDelete(prevState) {
+  const education = prevState.education;
+  if (education.isEditing) {
+    // Edit Mode
+    console.log('it is editing');
+  } else {
+    // Non-edit mode
+    return {
+      education: {
+        ...education,
+        currentInfo: getNewEducationInfo(),
+        formInfoIsPresent: false,
+      },
+    };
+  }
 }
 
 export default App;

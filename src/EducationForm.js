@@ -27,56 +27,26 @@ class EducationForm extends React.Component {
   }
 
   handleChange(e) {
-    const target = e.target;
-    const value = target.value;
-    const name = target.name;
-
-    this.setState({
-      currentInfo: Object.assign({}, this.state.currentInfo, {
-        [name]: value,
-      }),
-    });
+    this.props.onHandleChange(e, 'education');
   }
 
   handleSave(e) {
-    e.preventDefault();
-    if (this.state.isEditing) {
-      const newHistory = this.state.history.slice();
-      newHistory.splice(this.state.editCardNumber, 1, this.state.currentInfo);
-      this.setState({
-        history: newHistory,
-        currentInfo: getNewEducationInfo(),
-        isEditing: false,
-        editCardNumber: null,
-      });
-    } else {
-      this.setState({
-        history: this.state.history.concat(this.state.currentInfo),
-        currentInfo: getNewEducationInfo(),
-        isEditing: false,
-        editCardNumber: null,
-        formInfoIsPresent: false,
-      });
-    }
+    this.props.onHandleSave(e, 'education');
   }
 
   handleAddAnotherExperience(e) {
-    // e.preventDefault();
-    // this.setState({
-    //   formInfoIsPresent: true,
-    // });
-
     this.props.onHandleAddAnotherExperience(e, 'education');
   }
 
-  handleDelete(e) {
-    e.preventDefault();
-    this.setState({
-      isEditing: false,
-      editCardNumber: null,
-      formInfoIsPresent: false,
-      currentInfo: getNewEducationInfo(),
-    });
+  handleDelete(e, id) {
+    this.props.onHandleDelete(e, id, 'education');
+    // e.preventDefault();
+    // this.setState({
+    //   isEditing: false,
+    //   editCardNumber: null,
+    //   formInfoIsPresent: false,
+    //   currentInfo: getNewEducationInfo(),
+    // });
   }
 
   handleFormCardDelete(formCardNumber) {
@@ -108,7 +78,7 @@ class EducationForm extends React.Component {
               currentInfo={education.currentInfo}
               handleChange={this.handleChange}
               handleSave={this.handleSave}
-              handleDelete={this.handleDelete}
+              handleDelete={(e) => this.handleDelete(e, educationInfo.id)}
             />
           );
         }
