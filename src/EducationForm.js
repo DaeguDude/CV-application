@@ -40,21 +40,15 @@ class EducationForm extends React.Component {
 
   handleDelete(e, id) {
     this.props.onHandleDelete(e, id, 'education');
-    // e.preventDefault();
-    // this.setState({
-    //   isEditing: false,
-    //   editCardNumber: null,
-    //   formInfoIsPresent: false,
-    //   currentInfo: getNewEducationInfo(),
-    // });
   }
 
-  handleFormCardDelete(formCardNumber) {
-    const newHistory = this.state.history.slice();
-    newHistory.splice(formCardNumber, 1);
-    this.setState({
-      history: newHistory,
-    });
+  handleFormCardDelete(id) {
+    this.props.onHandleFormCardDelete(id, 'education');
+    // const newHistory = this.state.history.slice();
+    // newHistory.splice(formCardNumber, 1);
+    // this.setState({
+    //   history: newHistory,
+    // });
   }
 
   handleFormCardEdit(formCardNumber) {
@@ -87,7 +81,9 @@ class EducationForm extends React.Component {
           <EducationFormCard
             key={uniqid()}
             educationInfo={educationInfo}
-            handleFormCardDelete={() => this.handleFormCardDelete(itemNumber)}
+            handleFormCardDelete={() =>
+              this.handleFormCardDelete(educationInfo.id)
+            }
             handleFormCardEdit={() => this.handleFormCardEdit(itemNumber)}
           />
         );

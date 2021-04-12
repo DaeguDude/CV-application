@@ -144,16 +144,26 @@ class Main extends React.Component {
     }));
   }
 
-  onHandleFormCardDelete(id) {
-    this.setState((prevState) => {
-      const newWork = Object.assign({}, prevState.work);
-      const historyWithRemovedWorkInfo = newWork.history.filter(
-        (workInfo) => workInfo.id !== id
-      );
-      newWork.history = historyWithRemovedWorkInfo;
+  onHandleFormCardDelete(id, componentName) {
+    switch (componentName) {
+      case 'education':
+        this.setState((prevState) =>
+          educationOnHandleFormCardDelete(prevState, id)
+        );
+        break;
+      default:
+        break;
+    }
 
-      return { work: newWork };
-    });
+    // this.setState((prevState) => {
+    //   const newWork = Object.assign({}, prevState.work);
+    //   const historyWithRemovedWorkInfo = newWork.history.filter(
+    //     (workInfo) => workInfo.id !== id
+    //   );
+    //   newWork.history = historyWithRemovedWorkInfo;
+
+    //   return { work: newWork };
+    // });
   }
 
   onHandleSave(e, componentName) {
@@ -242,6 +252,7 @@ class Main extends React.Component {
             onHandleChange={this.onHandleChange}
             onHandleSave={this.onHandleSave}
             onHandleDelete={this.onHandleDelete}
+            onHandleFormCardDelete={this.onHandleFormCardDelete}
           />
         </div>
       );
@@ -359,6 +370,17 @@ function educationOnHandleDelete(prevState) {
       },
     };
   }
+}
+
+function educationOnHandleFormCardDelete(prevState, id) {
+  const newHistory = [...prevState.education.history];
+  const filteredHistory = newHistory.filter((education) => education.id !== id);
+  return {
+    education: {
+      ...prevState.education,
+      history: filteredHistory,
+    },
+  };
 }
 
 export default App;
