@@ -44,20 +44,10 @@ class EducationForm extends React.Component {
 
   handleFormCardDelete(id) {
     this.props.onHandleFormCardDelete(id, 'education');
-    // const newHistory = this.state.history.slice();
-    // newHistory.splice(formCardNumber, 1);
-    // this.setState({
-    //   history: newHistory,
-    // });
   }
 
-  handleFormCardEdit(formCardNumber) {
-    this.setState({
-      isEditing: true,
-      editCardNumber: formCardNumber,
-      currentInfo: this.state.history[formCardNumber],
-      formInfoIsPresent: false,
-    });
+  handleFormCardEdit(id) {
+    this.props.onHandleFormCardEdit(id, 'education');
   }
 
   render() {
@@ -69,6 +59,7 @@ class EducationForm extends React.Component {
         if (editCardNumber === itemNumber) {
           return (
             <FormInfoField
+              key={uniqid()}
               currentInfo={education.currentInfo}
               handleChange={this.handleChange}
               handleSave={this.handleSave}
@@ -84,7 +75,7 @@ class EducationForm extends React.Component {
             handleFormCardDelete={() =>
               this.handleFormCardDelete(educationInfo.id)
             }
-            handleFormCardEdit={() => this.handleFormCardEdit(itemNumber)}
+            handleFormCardEdit={() => this.handleFormCardEdit(educationInfo.id)}
           />
         );
       });

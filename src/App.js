@@ -209,24 +209,31 @@ class Main extends React.Component {
     // }
   }
 
-  onHandleFormCardEdit(id) {
-    const newWorkHistory = this.state.work.history.slice();
-    const workInfoToEdit = newWorkHistory.find(
-      (workInfo) => workInfo.id === id
-    );
-    const indexOfWorkInfoToEdit = newWorkHistory.findIndex(
-      (workInfo) => workInfo.id === id
-    );
+  onHandleFormCardEdit(id, componentName) {
+    switch (componentName) {
+      case 'education':
+        this.setState((prevState) => educationOnHandleFormEdit(prevState, id));
+        break;
+      default:
+        break;
+    }
+    // const newWorkHistory = this.state.work.history.slice();
+    // const workInfoToEdit = newWorkHistory.find(
+    //   (workInfo) => workInfo.id === id
+    // );
+    // const indexOfWorkInfoToEdit = newWorkHistory.findIndex(
+    //   (workInfo) => workInfo.id === id
+    // );
 
-    this.setState((prevState) => ({
-      work: {
-        ...prevState.work,
-        isEditing: true,
-        editCardNumber: indexOfWorkInfoToEdit,
-        currentInfo: workInfoToEdit,
-        formInfoIsPresent: false,
-      },
-    }));
+    // this.setState((prevState) => ({
+    //   work: {
+    //     ...prevState.work,
+    //     isEditing: true,
+    //     editCardNumber: indexOfWorkInfoToEdit,
+    //     currentInfo: workInfoToEdit,
+    //     formInfoIsPresent: false,
+    //   },
+    // }));
   }
 
   render() {
@@ -252,6 +259,7 @@ class Main extends React.Component {
             onHandleChange={this.onHandleChange}
             onHandleSave={this.onHandleSave}
             onHandleDelete={this.onHandleDelete}
+            onHandleFormCardEdit={this.onHandleFormCardEdit}
             onHandleFormCardDelete={this.onHandleFormCardDelete}
           />
         </div>
@@ -379,6 +387,24 @@ function educationOnHandleFormCardDelete(prevState, id) {
     education: {
       ...prevState.education,
       history: filteredHistory,
+    },
+  };
+}
+
+function educationOnHandleFormEdit(prevState, idToFind) {
+  const history = prevState.education.history;
+  const educationInfoToEdit = history.find(({ id }) => id === idToFind);
+  const indexOfEducationInfoToEdit = history.findIndex(
+    ({ id }) => id === idToFind
+  );
+
+  return {
+    education: {
+      ...prevState.education,
+      editCardNumber: indexOfEducationInfoToEdit,
+      currentInfo: educationInfoToEdit,
+      isEditing: true,
+      formInfoIsPresent: false,
     },
   };
 }
