@@ -349,18 +349,16 @@ function educationOnHandleSave(prevState) {
 
   if (education.isEditing) {
     const newHistory = [...education.history];
-    console.log(
-      newHistory.splice(education.editCardNumber, 1, education.currentInfo)
-    );
-    // return {
-    //   education: {
-    //     ...education,
-    //     history:
-    //     isEditing: false,
-    //     editCardNumber: null,
-    //     currentInfo: getNewEducationInfo(),
-    //   },
-    // };
+    newHistory.splice(education.editCardNumber, 1, education.currentInfo);
+    return {
+      education: {
+        ...education,
+        history: newHistory,
+        currentInfo: getNewEducationInfo(),
+        isEditing: false,
+        editCardNumber: null,
+      },
+    };
   } else {
     return {
       education: {
