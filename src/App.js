@@ -119,7 +119,7 @@ class Main extends React.Component {
     e.preventDefault();
     switch (componentName) {
       case 'education':
-        this.setState(educationOnHandleDelete);
+        this.setState((prevState) => educationOnHandleDelete(prevState, id));
         break;
       default:
         break;
@@ -346,8 +346,21 @@ function educationOnHandleChange(prevState, name, value) {
 
 function educationOnHandleSave(prevState) {
   const education = prevState.education;
+
   if (education.isEditing) {
-    console.log('it is editing');
+    const newHistory = [...education.history];
+    console.log(
+      newHistory.splice(education.editCardNumber, 1, education.currentInfo)
+    );
+    // return {
+    //   education: {
+    //     ...education,
+    //     history:
+    //     isEditing: false,
+    //     editCardNumber: null,
+    //     currentInfo: getNewEducationInfo(),
+    //   },
+    // };
   } else {
     return {
       education: {
@@ -363,21 +376,30 @@ function educationOnHandleSave(prevState) {
   }
 }
 
-function educationOnHandleDelete(prevState) {
+function educationOnHandleDelete(prevState, id) {
   const education = prevState.education;
+
   if (education.isEditing) {
-    // Edit Mode
-    console.log('it is editing');
-  } else {
-    // Non-edit mode
     return {
       education: {
         ...education,
+        history: education.history.filter(
+          (educationInfo) => educationInfo.id !== id
+        ),
+        isEditing: false,
+        editCardNumber: null,
         currentInfo: getNewEducationInfo(),
-        formInfoIsPresent: false,
       },
     };
   }
+
+  return {
+    education: {
+      ...education,
+      currentInfo: getNewEducationInfo(),
+      formInfoIsPresent: false,
+    },
+  };
 }
 
 function educationOnHandleFormCardDelete(prevState, id) {

@@ -59,7 +59,6 @@ class EducationForm extends React.Component {
         if (editCardNumber === itemNumber) {
           return (
             <FormInfoField
-              key={uniqid()}
               currentInfo={education.currentInfo}
               handleChange={this.handleChange}
               handleSave={this.handleSave}
@@ -121,7 +120,7 @@ class FormInfoField extends React.Component {
               name="degree"
               type="text"
               handleChange={handleChange}
-              value={currentInfo.jobTitle}
+              value={currentInfo.degree}
             />
           }
           secondItem={
@@ -141,7 +140,7 @@ class FormInfoField extends React.Component {
             name="school"
             type="text"
             handleChange={handleChange}
-            value={currentInfo.employer}
+            value={currentInfo.school}
           />
         </FormRow>
 
