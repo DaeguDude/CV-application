@@ -226,27 +226,4 @@ class SecondItem extends React.Component {
   }
 }
 
-function getInitialEducationProperties() {
-  return {
-    history: [],
-    currentInfo: getNewEducationInfo(),
-    isEditing: false,
-    editCardNumber: null,
-    formInfoIsPresent: false,
-  };
-}
-
-function getNewEducationInfo() {
-  return {
-    degree: '',
-    city: '',
-    school: '',
-    startMonth: "Don't Show This",
-    startYear: 1960,
-    endMonth: "Don't Show This",
-    endYear: 1960,
-    description: '',
-  };
-}
-
 export default EducationForm;

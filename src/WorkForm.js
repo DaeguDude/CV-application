@@ -26,27 +26,27 @@ class WorkForm extends React.Component {
   }
 
   handleChange(e) {
-    this.props.onHandleChange(e);
+    this.props.onHandleChange(e, 'work');
   }
 
   handleSave(e) {
-    this.props.onHandleSave(e);
+    this.props.onHandleSave(e, 'work');
   }
 
   handleAddAnotherExperience(e) {
-    this.props.onHandleAddAnotherExperience(e);
+    this.props.onHandleAddAnotherExperience(e, 'work');
   }
 
   handleDelete(e, id) {
-    this.props.onHandleDelete(e, id);
+    this.props.onHandleDelete(e, id, 'work');
   }
 
   handleFormCardDelete(id) {
-    this.props.onHandleFormCardDelete(id);
+    this.props.onHandleFormCardDelete(id, 'work');
   }
 
   handleFormCardEdit(id) {
-    this.props.onHandleFormCardEdit(id);
+    this.props.onHandleFormCardEdit(id, 'work');
   }
 
   render() {
