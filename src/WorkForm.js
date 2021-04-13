@@ -63,7 +63,7 @@ class WorkForm extends React.Component {
               currentInfo={workInformation.currentInfo}
               handleChange={this.handleChange}
               handleSave={this.handleSave}
-              handleDelete={this.handleDelete}
+              handleDelete={(e) => this.handleDelete(e, workInfo.id)}
             />
           );
         }

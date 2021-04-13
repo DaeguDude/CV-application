@@ -39,13 +39,6 @@ class Main extends React.Component {
     this.state = {
       currentPage: 'personal',
       work: WorkHelper.getInitialProperties(),
-      // work: {
-      //   history: [],
-      //   currentInfo: WorkHelper.getNewInfo(),
-      //   isEditing: false,
-      //   editCardNumber: null,
-      //   formInfoIsPresent: false,
-      // },
       education: EducationHelpers.getInitialProperties(),
     };
 
