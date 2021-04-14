@@ -7,9 +7,9 @@ import {
   FormItemTextArea,
   FormItemMonth,
   FormItemYear,
-} from '../Form/Form';
-import { EducationFormCard } from '../Form/FormCard';
-import { FormSmallBtns, FormAddAnotherBtn } from '../Form/FormBtns';
+} from './Form/Form';
+import { EducationFormCard } from './Form/FormCard';
+import { FormSmallBtns, FormAddAnotherBtn } from './Form/FormBtns';
 import uniqid from 'uniqid';
 
 class EducationForm extends React.Component {
