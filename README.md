@@ -1,12 +1,17 @@
 # 📝 CV application
 
-CV application projects that helps you build CV eaiser. Built with React.
+CV application that helps you build a CV eaiser.
+
+## 🎥 Demo
+
+<img src="./src/assets/cvProjectDemo.gif" alt='cv project demo'>
 
 ## 📕 Features
 
 - Add Personal Information
-- Add Work Experience
-- Add Education Information
+- Add Work Experiences
+- Add Education Informations
+- Display all the CV informations
 
 ## 🧑‍🔧 How to use
 
@@ -16,15 +21,9 @@ To run locally, first install packages with `npm install` and then run `npm star
 
 ## 🚎 To Be Added
 
-**UI / UX**
-
-- Clone [cvmaker](https://www.cvmaker.com/) design
-
-**Features**
-
-- Add multiple work experiences
-- Add more fields(e.g. interests, skills, and etc)
+- Export as pdf
+- Additional information fields
 
 ## 📩 Contact
 
-k3hppk@gmail.com
+If you want to contact me, please reach me at k3hppk@gmail.com
