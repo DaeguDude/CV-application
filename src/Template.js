@@ -1,10 +1,5 @@
 import React from 'react';
 
-const information = {
-  name: 'Sanghak Kim',
-  sections: ['Personal', 'Work Experiences', 'Education'],
-};
-
 class Template extends React.Component {
   render() {
     const { personal, work, education } = this.props;
