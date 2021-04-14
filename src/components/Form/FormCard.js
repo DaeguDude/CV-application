@@ -1,6 +1,6 @@
 import React from 'react';
-import FormCardDeleteIcon from '../icons/FormCardDeleteIcon';
-import FormCardEditIcon from '../icons/FormCardEditIcon';
+import FormCardDeleteIcon from '../../icons/FormCardDeleteIcon';
+import FormCardEditIcon from '../../icons/FormCardEditIcon';
 
 class FormCard extends React.Component {
   render() {

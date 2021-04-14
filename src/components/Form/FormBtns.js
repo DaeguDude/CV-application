@@ -1,8 +1,8 @@
 import React from 'react';
-import DeleteIcon from '../icons/DeleteIcon';
-import SaveIcon from '../icons/SaveIcon';
-import PlusIcon from '../icons/PlusIcon';
-import NextIcon from '../icons/NextIcon';
+import DeleteIcon from '../../icons/DeleteIcon';
+import SaveIcon from '../../icons/SaveIcon';
+import PlusIcon from '../../icons/PlusIcon';
+import NextIcon from '../../icons/NextIcon';
 
 class FormSmallBtns extends React.Component {
   render() {

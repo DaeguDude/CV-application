@@ -1,7 +1,5 @@
 import React from 'react';
 
-// const currentInfo = ['Personal', 'Experiences', 'Template']
-
 class ProgressBar extends React.Component {
   render() {
     const currentPage = this.props.currentPage;

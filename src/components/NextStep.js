@@ -1,5 +1,5 @@
 import React from 'react';
-import NextIcon from './icons/NextIcon';
+import NextIcon from '../icons/NextIcon';
 
 class NextStep extends React.Component {
   render() {
