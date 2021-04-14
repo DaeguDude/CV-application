@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormTitle, FormRow, TwoColumnsFormRow, FormItem } from '../Form/Form';
+import { FormTitle, FormRow, TwoColumnsFormRow, FormItem } from './Form/Form';
 
 class PersonalForm extends React.Component {
   constructor(props) {
