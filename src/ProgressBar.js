@@ -5,6 +5,7 @@ import React from 'react';
 class ProgressBar extends React.Component {
   render() {
     const currentPage = this.props.currentPage;
+    const handleChangePage = this.props.onHandleChangePage;
 
     let isCompletedList = [];
     let progressBarFillerWidth;
@@ -28,14 +29,17 @@ class ProgressBar extends React.Component {
           <PersonProgressBarBtn
             label="Personal"
             isCompleted={isCompletedList[0]}
+            handleChangePage={handleChangePage}
           />
           <DocumentProgressBarBtn
             label="Experiences"
             isCompleted={isCompletedList[1]}
+            handleChangePage={handleChangePage}
           />
           <CreateProgressBarBtn
             label="Experiences"
             isCompleted={isCompletedList[2]}
+            handleChangePage={handleChangePage}
           />
         </div>
       </div>
@@ -70,21 +74,32 @@ class ProgressBarLabel extends React.Component {
 
 class ProgressBarBtn extends React.Component {
   render() {
-    const { isCompleted } = this.props;
+    const { isCompleted, handleChangePage } = this.props;
     const className = isCompleted
       ? 'progress-bar__button progress-bar__button--completed'
       : 'progress-bar__button';
 
-    return <button className={className}>{this.props.children}</button>;
+    const name = this.props.name;
+
+    return (
+      <button className={className} onClick={(e) => handleChangePage(e, name)}>
+        {this.props.children}
+      </button>
+    );
   }
 }
 
 class PersonProgressBarBtn extends React.Component {
   render() {
     const isCompleted = this.props.isCompleted;
+    const handleChangePage = this.props.handleChangePage;
 
     return (
-      <ProgressBarBtn isCompleted={isCompleted}>
+      <ProgressBarBtn
+        name="personal"
+        isCompleted={isCompleted}
+        handleChangePage={handleChangePage}
+      >
         <PersonIcon isCompleted={isCompleted} />
         <ProgressBarLabel label="Personal" />
       </ProgressBarBtn>
@@ -95,9 +110,14 @@ class PersonProgressBarBtn extends React.Component {
 class DocumentProgressBarBtn extends React.Component {
   render() {
     const isCompleted = this.props.isCompleted;
+    const handleChangePage = this.props.handleChangePage;
 
     return (
-      <ProgressBarBtn isCompleted={isCompleted}>
+      <ProgressBarBtn
+        name="experiences"
+        isCompleted={isCompleted}
+        handleChangePage={handleChangePage}
+      >
         <DocumentIcon isCompleted={isCompleted} />
         <ProgressBarLabel label="Experiences" />
       </ProgressBarBtn>
@@ -108,9 +128,14 @@ class DocumentProgressBarBtn extends React.Component {
 class CreateProgressBarBtn extends React.Component {
   render() {
     const isCompleted = this.props.isCompleted;
+    const handleChangePage = this.props.handleChangePage;
 
     return (
-      <ProgressBarBtn isCompleted={isCompleted}>
+      <ProgressBarBtn
+        name="template"
+        isCompleted={isCompleted}
+        handleChangePage={handleChangePage}
+      >
         <CreateIcon isCompleted={isCompleted} />
         <ProgressBarLabel label="Template" />
       </ProgressBarBtn>

@@ -53,21 +53,30 @@ class Main extends React.Component {
     this.onHandleSave = this.onHandleSave.bind(this);
     this.onHandleFormCardEdit = this.onHandleFormCardEdit.bind(this);
     this.onHandleFormCardDelete = this.onHandleFormCardDelete.bind(this);
+    this.onHandleChangePage = this.onHandleChangePage.bind(this);
+  }
+
+  onHandleChangePage(e, name) {
+    this.setState({
+      currentPage: name,
+    });
   }
 
   handleNext(e) {
-    console.log('handle Next');
-    if (this.state.currentPage === 'personal') {
-      this.setState({
-        currentPage: 'experiences',
-      });
-    }
+    this.setState((prevState) => {
+      switch (prevState.currentPage) {
+        case 'personal':
+          prevState.currentPage = 'experiences';
+          break;
+        case 'experiences':
+          prevState.currentPage = 'template';
+          break;
+        default:
+          break;
+      }
 
-    if (this.state.currentPage === 'experiences') {
-      this.setState({
-        currentPage: 'template',
-      });
-    }
+      return { currentPage: prevState.currentPage };
+    });
   }
 
   onHandleAddAnotherExperience(e, componentName) {
@@ -217,7 +226,10 @@ class Main extends React.Component {
       <div>
         <main class="container">
           <h1 class="page-title">Personal Details</h1>
-          <ProgressBar currentPage={currentPage} />
+          <ProgressBar
+            currentPage={currentPage}
+            onHandleChangePage={this.onHandleChangePage}
+          />
           {page}
           <NextStep handleNext={this.handleNext} />
         </main>
