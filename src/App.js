@@ -204,7 +204,13 @@ class Main extends React.Component {
         </div>
       );
     } else {
-      page = <Template />;
+      page = (
+        <Template
+          personal={this.state.personal}
+          work={this.state.work}
+          education={this.state.education}
+        />
+      );
     }
 
     return (

@@ -5,72 +5,19 @@ const information = {
   sections: ['Personal', 'Work Experiences', 'Education'],
 };
 
-const personal = {
-  firstName: 'Sanghak',
-  lastName: 'Kim',
-  email: 'k3hppk@gmail.com',
-  phoneNumber: '+821012341234',
-  address: 'Bongcheondong nakseongdae',
-  zipCode: '42833',
-  city: 'Seoul',
-};
-
-const workHistory = [
-  {
-    jobTitle: 'Juni Developer',
-    city: 'San Francisco',
-    employer: 'Airbnb',
-    description: 'I have worked...',
-    startMonth: 'February',
-    startYear: '1971',
-    endMonth: 'September',
-    endYear: '1973',
-  },
-  {
-    jobTitle: 'Senior Developer',
-    city: 'Daegu',
-    employer: 'Google Korea',
-    description: 'I have worked as ...',
-    startMonth: 'December',
-    startYear: '1975',
-    endMonth: 'October',
-    endYear: '1999',
-  },
-];
-
-const educationHistory = [
-  {
-    degree: 'Statistics',
-    city: 'Daegu',
-    school: 'Keimyeong University',
-    startMonth: 'November',
-    startYear: '1976',
-    endMonth: 'December',
-    endYear: '1976',
-    description: 'I earned a bachelor degree of',
-  },
-  {
-    degree: 'Bachelor of Business Management',
-    city: 'Daegu',
-    school: 'Keimyeong University',
-    startMonth: 'December',
-    startYear: '1978',
-    endMonth: 'November',
-    endYear: '1991',
-    description: 'I have earned...',
-  },
-];
-
 class Template extends React.Component {
   render() {
-    console.log(this.props);
+    const { personal, work, education } = this.props;
 
     return (
       <div className="template">
-        <TemplateName name={information.name} />
+        <TemplateName
+          firstName={personal.firstName}
+          lastName={personal.lastName}
+        />
         <PersonalTemplateSection name="Personal" history={personal} />
-        <TemplateSection name="Work Experiences" history={workHistory} />
-        <TemplateSection name="Education" history={educationHistory} />
+        <TemplateSection name="Work Experiences" history={work.history} />
+        <TemplateSection name="Education" history={education.history} />
       </div>
     );
   }
@@ -78,12 +25,18 @@ class Template extends React.Component {
 
 class TemplateName extends React.Component {
   render() {
-    return <h1 className="template__name">{this.props.name}</h1>;
+    return (
+      <h1 className="template__name">
+        {this.props.firstName} {this.props.lastName}
+      </h1>
+    );
   }
 }
 
 class PersonalTemplateSection extends React.Component {
   render() {
+    const personal = this.props.history;
+
     return (
       <div className="template__section template__section--personal">
         <TemplateSectionHeader name="Personal" />
@@ -144,12 +97,6 @@ class TemplateSectionHeader extends React.Component {
 class TemplateSectionMain extends React.Component {
   render() {
     const history = this.props.history;
-
-    if (getSectionName(this.props.name) === 'Work') {
-    }
-
-    if (getSectionName(this.props.name) === 'Education') {
-    }
 
     return (
       <div className="template__section--main">
