@@ -10,6 +10,7 @@ import uniqid from 'uniqid';
 
 import EducationHelpers from './helpers/education';
 import WorkHelper from './helpers/work';
+import PersonalHelper from './helpers/personal';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ class Main extends React.Component {
     super(props);
     this.state = {
       currentPage: 'personal',
+      personal: PersonalHelper.getInitialProperties(),
       work: WorkHelper.getInitialProperties(),
       education: EducationHelpers.getInitialProperties(),
     };
@@ -98,6 +100,10 @@ class Main extends React.Component {
           WorkHelper.onHandleChange(prevState, name, value)
         );
         break;
+      case 'personal':
+        this.setState((prevState) =>
+          PersonalHelper.onHandleChange(prevState, name, value)
+        );
       default:
         break;
     }
@@ -168,7 +174,12 @@ class Main extends React.Component {
     const currentPage = this.state.currentPage;
     let page;
     if (currentPage === 'personal') {
-      page = <PersonalForm />;
+      page = (
+        <PersonalForm
+          personal={this.state.personal}
+          onHandleChange={this.onHandleChange}
+        />
+      );
     } else if (currentPage === 'experiences') {
       page = (
         <div>
@@ -207,20 +218,6 @@ class Main extends React.Component {
       </div>
     );
   }
-}
-
-function getNewInfo() {
-  return {
-    id: uniqid(),
-    jobTitle: '',
-    city: '',
-    employer: '',
-    description: '',
-    startMonth: "Don't Show This",
-    startYear: 1960,
-    endMonth: "Don't Show This",
-    endYear: 1960,
-  };
 }
 
 export default App;
